@@ -15,8 +15,21 @@ public class MainActivity extends Activity implements NewAssessment.OnFragmentIn
         return assessments.getAssessments().size();
     }
 
+    public String[] getAssessmentsList() {
+        return assessments.getAssessmentsDetailList();
+    }
+
+    public double getGradeNeeded(double desiredGrade) {
+        return assessments.calcGradeNeeded(desiredGrade);
+    }
+
+    public double getCurrentGrade() {
+        return assessments.getCurrentGrade();
+    }
+
     public void sendAssessment(Assessment as) {
         assessments.addAssessment(as);
+
     }
 
     @Override

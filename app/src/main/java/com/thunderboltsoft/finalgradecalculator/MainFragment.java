@@ -3,14 +3,20 @@ package com.thunderboltsoft.finalgradecalculator;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -20,7 +26,7 @@ import com.melnykov.fab.FloatingActionButton;
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends ListFragment {
+public class MainFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,12 +73,36 @@ public class MainFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        MainActivity main = (MainActivity) getActivity();
+        final MainActivity main = (MainActivity) getActivity();
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        final View view = inflater.inflate(R.layout.fragment_main, container, false);
         TextView txtView = (TextView) view.findViewById(R.id.textView);
-        String counter = Integer.toString(main.getNumAssessments());
-        txtView.setText(counter);
+
+//        String counter = Integer.toString(main.getNumAssessments());
+        String currentGrade = String.format("%.2f", main.getCurrentGrade());
+        txtView.setText(currentGrade);
+
+        Button btnCalc = (Button) view.findViewById(R.id.btnCalcNeededGrade);
+        btnCalc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView desiredExamGrade = (TextView) view.findViewById(R.id.textViewDesiredResult);
+
+                EditText editTxtDesiredGrade = (EditText) view.findViewById(R.id.editTextDesiredGrade);
+
+                String desiredGradeString = editTxtDesiredGrade.getText().toString();
+                if (desiredGradeString.matches("")) {
+                    editTxtDesiredGrade.setText(String.format("%.2f", 50.0).toString());
+
+                    String neededGrade = "You need at least " + String.format("%.2f", main.getGradeNeeded(50.0)).toString() + "% to achieve a course grade of " + String.format("%.2f", Double.parseDouble(editTxtDesiredGrade.getText().toString())).toString() + "%";
+                    desiredExamGrade.setText(neededGrade);
+                } else {
+                    String neededGrade = "You need at least " + String.format("%.2f", main.getGradeNeeded(Double.parseDouble(desiredGradeString))).toString() + "% to achieve a course grade of " + String.format("%.2f", Double.parseDouble(desiredGradeString)).toString() + "%";
+                    desiredExamGrade.setText(neededGrade);
+                }
+            }
+        });
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +114,15 @@ public class MainFragment extends ListFragment {
                 fragmentTransaction.commit();
             }
         });
+
+        ListView mainList = (ListView) view.findViewById(R.id.assessmentListView);
+        ArrayList<String> assessmentList = new ArrayList<>();
+        assessmentList.addAll(Arrays.asList(main.getAssessmentsList()));
+
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<>(view.getContext(), R.layout.list_row, assessmentList);
+
+        mainList.setAdapter(listAdapter);
+
         return view;
     }
 }
