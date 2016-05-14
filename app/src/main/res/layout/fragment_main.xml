@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textView"
+        android:text="CG"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -21,13 +21,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:src="@drawable/ic_action_content_new"
-        fab:fab_colorNormal="@color/primary"
-        fab:fab_colorPressed="@color/primary_dark"
+        fab:fab_colorNormal="@color/colorAccent"
+        fab:fab_colorPressed="@color/colorAccentDark"
         fab:fab_colorRipple="@color/ripple"
         fab:fab_shadow="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -35,39 +37,56 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editTextDesiredGrade"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView" />
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/fab"
+        android:layout_alignEnd="@+id/fab" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewDesiredResult"
+        android:text="NG"
         android:layout_below="@+id/editTextDesiredGrade"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/assessmentListView"
-        android:layout_below="@+id/editTextDesiredGrade"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="47dp"
-        android:layout_above="@+id/fab" />
+        android:layout_above="@+id/fab"
+        android:layout_below="@+id/textViewDesiredResult" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_calc"
         android:id="@+id/btnCalcNeededGrade"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/fab"
+        android:layout_alignEnd="@+id/fab"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Desired Grade"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/editTextDesiredGrade"
+        android:layout_toLeftOf="@+id/editTextDesiredGrade"
+        android:layout_toStartOf="@+id/editTextDesiredGrade" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Current Grade: "
+        android:id="@+id/textView2"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/textViewDesiredResult"
-        android:layout_toEndOf="@+id/editTextDesiredGrade" />
+        android:layout_toLeftOf="@+id/textViewDesiredResult"
+        android:layout_toStartOf="@+id/textViewDesiredResult" />
 
 </RelativeLayout>
