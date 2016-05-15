@@ -6,48 +6,61 @@
     android:id="@+id/main_fragment"
     tools:context="com.thunderboltsoft.finalgradecalculator.MainFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView"
-        android:text="CG"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:orientation="horizontal"
+        android:id="@+id/linearLayoutCurrentGrade">
 
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:src="@drawable/ic_action_content_new"
-        fab:fab_colorNormal="@color/colorAccent"
-        fab:fab_colorPressed="@color/colorAccentDark"
-        fab:fab_colorRipple="@color/ripple"
-        fab:fab_shadow="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/current_grade"
+            android:id="@+id/textView2"
+            android:layout_weight="0.6" />
 
-    <EditText
-        android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:id="@+id/textView"
+            android:gravity="center"
+            android:layout_weight="0.4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextDesiredGrade"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/fab"
-        android:layout_alignEnd="@+id/fab" />
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearLayoutCurrentGrade"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayoutDesiredGrade">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/desired_grade"
+            android:id="@+id/textView3"
+            android:layout_weight="0.6" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:id="@+id/editTextDesiredGrade"
+            android:layout_weight="0.4" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewDesiredResult"
-        android:text="NG"
-        android:layout_below="@+id/editTextDesiredGrade"
+        android:text=""
+        android:layout_below="@+id/linearLayoutDesiredGrade"
         android:layout_centerHorizontal="true" />
 
     <ListView
@@ -59,34 +72,20 @@
         android:layout_above="@+id/fab"
         android:layout_below="@+id/textViewDesiredResult" />
 
-    <Button
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_calc"
-        android:id="@+id/btnCalcNeededGrade"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/fab"
-        android:layout_alignEnd="@+id/fab"
-        android:visibility="gone" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Desired Grade"
-        android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/editTextDesiredGrade"
-        android:layout_toLeftOf="@+id/editTextDesiredGrade"
-        android:layout_toStartOf="@+id/editTextDesiredGrade" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Current Grade: "
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/textViewDesiredResult"
-        android:layout_toStartOf="@+id/textViewDesiredResult" />
+        android:layout_gravity="end"
+        android:src="@drawable/ic_action_content_new"
+        fab:fab_colorNormal="@color/colorAccent"
+        fab:fab_colorPressed="@color/colorAccentDark"
+        fab:fab_colorRipple="@color/ripple"
+        fab:fab_shadow="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin" />
 
 </RelativeLayout>

@@ -18,6 +18,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 
 /**
@@ -77,17 +78,15 @@ public class MainFragment extends Fragment {
         final MainActivity main = (MainActivity) getActivity();
 
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
-        TextView txtView = (TextView) view.findViewById(R.id.textView);
+        EditText txtView = (EditText) view.findViewById(R.id.textView);
 
-//        String counter = Integer.toString(main.getNumAssessments());
-        String currentGrade = String.format("%.2f", main.getCurrentGrade());
+        String currentGrade = String.format(Locale.getDefault(), "%.2f", main.getCurrentGrade());
         txtView.setText(currentGrade);
 
         final EditText editTxtDesiredGrade = (EditText) view.findViewById(R.id.editTextDesiredGrade);
         editTxtDesiredGrade.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -96,37 +95,15 @@ public class MainFragment extends Fragment {
                     double gradeNeeded = main.getGradeNeeded(Double.parseDouble(editTxtDesiredGrade.getText().toString()));
 
                     TextView desiredExamGrade = (TextView) view.findViewById(R.id.textViewDesiredResult);
-                    String neededGrade = "You need at least " + String.format("%.2f", gradeNeeded).toString() + "% to achieve a course grade of " + String.format("%.2f", Double.parseDouble(editTxtDesiredGrade.getText().toString())).toString() + "%";
+                    String neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(editTxtDesiredGrade.getText().toString())) + "%";
                     desiredExamGrade.setText(neededGrade);
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
-
-//        Button btnCalc = (Button) view.findViewById(R.id.btnCalcNeededGrade);
-//        btnCalc.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView desiredExamGrade = (TextView) view.findViewById(R.id.textViewDesiredResult);
-//
-//                EditText editTxtDesiredGrade = (EditText) view.findViewById(R.id.editTextDesiredGrade);
-//
-//                String desiredGradeString = editTxtDesiredGrade.getText().toString();
-//                if (desiredGradeString.matches("")) {
-//                    editTxtDesiredGrade.setText(String.format("%.2f", 50.0).toString());
-//
-//                    String neededGrade = "You need at least " + String.format("%.2f", main.getGradeNeeded(50.0)).toString() + "% to achieve a course grade of " + String.format("%.2f", Double.parseDouble(editTxtDesiredGrade.getText().toString())).toString() + "%";
-//                    desiredExamGrade.setText(neededGrade);
-//                } else {
-//                    String neededGrade = "You need at least " + String.format("%.2f", main.getGradeNeeded(Double.parseDouble(desiredGradeString))).toString() + "% to achieve a course grade of " + String.format("%.2f", Double.parseDouble(desiredGradeString)).toString() + "%";
-//                    desiredExamGrade.setText(neededGrade);
-//                }
-//            }
-//        });
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

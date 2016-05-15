@@ -1,12 +1,13 @@
 package com.thunderboltsoft.finalgradecalculator;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity implements NewAssessment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements NewAssessment.OnFragmentInteractionListener {
 
     private ListAssessments assessments;
     private MainFragment mainFragment;
@@ -37,6 +38,10 @@ public class MainActivity extends Activity implements NewAssessment.OnFragmentIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar myToolBar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolBar);
+        getSupportActionBar().setTitle("Grade Calculator");
+
         assessments = new ListAssessments();
 
         mainFragment = new MainFragment();
@@ -60,9 +65,9 @@ public class MainActivity extends Activity implements NewAssessment.OnFragmentIn
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
