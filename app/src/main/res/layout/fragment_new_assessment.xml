@@ -5,47 +5,68 @@
     android:id="@+id/fragment_new_assessment"
     tools:context="com.thunderboltsoft.finalgradecalculator.NewAssessment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/weight"
-        android:id="@+id/lblEnterWeight"
-        android:layout_centerHorizontal="true" />
+        android:orientation="horizontal"
+        android:id="@+id/linearLayoutEnterWeight">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:layout_below="@id/lblEnterWeight"
-        android:id="@+id/txtEnterWeight"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/weight"
+            android:id="@+id/lblEnterWeight"
+            android:gravity="right"
+            android:layout_weight="0.6"
+            android:paddingRight="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enter_grade"
-        android:id="@+id/lblEnterGrade"
-        android:layout_below="@id/txtEnterWeight"
-        android:layout_centerHorizontal="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="6"
+            android:id="@+id/txtEnterWeight"
+            android:hint="@string/percent"
+            android:gravity="center"
+            android:layout_weight="0.4" />
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/txtEnterGrade"
-        android:layout_below="@+id/lblEnterGrade"
-        android:layout_centerHorizontal="true" />
+        android:orientation="horizontal"
+        android:id="@+id/linearLayoutEnterGrade"
+        android:layout_below="@id/linearLayoutEnterWeight">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/enter_grade"
+            android:id="@+id/lblEnterGrade"
+            android:gravity="end"
+            android:layout_weight="0.6"
+            android:paddingRight="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="6"
+            android:id="@+id/txtEnterGrade"
+            android:hint="@string/percent"
+            android:gravity="center"
+            android:layout_weight="0.4"
+            android:maxWidth="10dp" />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_add"
         android:id="@+id/btnAdd"
-        android:layout_below="@id/txtEnterGrade"
+        android:layout_below="@id/linearLayoutEnterGrade"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

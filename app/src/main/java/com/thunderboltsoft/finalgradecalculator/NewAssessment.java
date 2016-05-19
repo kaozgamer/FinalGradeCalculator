@@ -38,6 +38,8 @@ public class NewAssessment extends Fragment {
     public EditText weight;
     public EditText grade;
 
+    public Assessment p;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -60,6 +62,10 @@ public class NewAssessment extends Fragment {
         // Required empty public constructor
     }
 
+    public void setFromListView(Assessment p) {
+        this.p = p;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +86,11 @@ public class NewAssessment extends Fragment {
         btnAdd = (Button) view.findViewById(R.id.btnAdd);
         weight = (EditText) view.findViewById(R.id.txtEnterWeight);
         grade = (EditText) view.findViewById(R.id.txtEnterGrade);
+
+        if (p != null) {
+            weight.setText(String.valueOf(p.getWeight()));
+            grade.setText(String.valueOf(p.getGrade()));
+        }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

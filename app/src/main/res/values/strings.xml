@@ -2,9 +2,9 @@
     <string name="app_name">Final Grade Calculator</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="enter_grade">Enter Grade</string>
+    <string name="enter_grade">Enter Grade:</string>
     <string name="new_assessment_title">New Assessment</string>
-    <string name="weight">Enter Weight</string>
+    <string name="weight">Enter Weight:</string>
     <string name="button_add">Add</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -12,4 +12,6 @@
     <string name="button_calc">Calc</string>
     <string name="current_grade">Current Grade:</string>
     <string name="desired_grade">Desired Grade:</string>
+    <string name="percent">%</string>
+    <string name="desired_result_description">Enter assessments grade details and your desired grade.\n The final assessment grade needed to achieve your desired grade will show up here.</string>
 </resources>

@@ -9,15 +9,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 
@@ -117,11 +116,26 @@ public class MainFragment extends Fragment {
             }
         });
 
-        ListView mainList = (ListView) view.findViewById(R.id.assessmentListView);
-        ArrayList<String> assessmentList = new ArrayList<>();
-        assessmentList.addAll(Arrays.asList(main.getAssessmentsList()));
+        final ListAdapter listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, main.getAssessments());
 
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<>(view.getContext(), R.layout.list_row, assessmentList);
+        final ListView mainList = (ListView) view.findViewById(R.id.assessmentListView);
+        mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Assessment p = (Assessment) mainList.getItemAtPosition(position);
+                Toast.makeText(view.getContext(), String.valueOf(p.getGrade()), Toast.LENGTH_SHORT).show();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                NewAssessment fragment = new NewAssessment();
+                fragment.setFromListView(p);
+                fragmentTransaction.replace(R.id.main_screen, fragment);
+                fragmentTransaction.commit();
+
+                listAdapter.remove(p);
+                listAdapter.notifyDataSetChanged();
+            }
+        });
 
         mainList.setAdapter(listAdapter);
 

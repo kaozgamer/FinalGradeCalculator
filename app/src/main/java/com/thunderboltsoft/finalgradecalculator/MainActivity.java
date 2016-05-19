@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements NewAssessment.OnFragmentInteractionListener {
 
     private ListAssessments assessments;
@@ -18,6 +20,10 @@ public class MainActivity extends AppCompatActivity implements NewAssessment.OnF
 
     public String[] getAssessmentsList() {
         return assessments.getAssessmentsDetailList();
+    }
+
+    public List<Assessment> getAssessments() {
+        return assessments.getAssessments();
     }
 
     public double getGradeNeeded(double desiredGrade) {
