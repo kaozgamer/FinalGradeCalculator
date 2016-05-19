@@ -1,6 +1,5 @@
 package com.thunderboltsoft.finalgradecalculator;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,7 +8,7 @@ import android.view.MenuItem;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NewAssessment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
     private ListAssessments assessments;
     private MainFragment mainFragment;
@@ -76,10 +75,6 @@ public class MainActivity extends AppCompatActivity implements NewAssessment.OnF
 //        }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onFragmentInteraction(Uri uri) {
-        //you can leave it empty
     }
 
     @Override
