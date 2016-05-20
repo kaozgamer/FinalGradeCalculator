@@ -1,6 +1,8 @@
 package com.thunderboltsoft.finalgradecalculator;
 
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -44,14 +46,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar myToolBar = (Toolbar) findViewById(R.id.toolbar);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         setSupportActionBar(myToolBar);
-        getSupportActionBar().setTitle("Grade Calculator");
+
+        ActionBar sActionBar = getSupportActionBar();
+        if (sActionBar != null) {
+            sActionBar.setTitle("Grade Calculator");
+        }
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//
+//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,myToolBar,R.string.app_name,R.string.app_name);
+//        drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         assessments = new ListAssessments();
 
         mainFragment = new MainFragment();
 
-        getFragmentManager().beginTransaction().replace(R.id.main_screen, mainFragment, "Tag").addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, new ViewPagerContainerFragment()).commit();
+
+        //getFragmentManager().beginTransaction().replace(R.id.main_screen, mainFragment, "Tag").addToBackStack(null).commit();
     }
 
 

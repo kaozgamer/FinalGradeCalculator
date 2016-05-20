@@ -10,4 +10,5 @@
     <string name="desired_grade">Desired Grade:</string>
     <string name="percent">%</string>
     <string name="desired_result_description">Enter assessments grade details and your desired grade.\n The final assessment grade needed to achieve your desired grade will show up here.</string>
+    <string name="switch_description">Do you know your current grade?</string>
 </resources>

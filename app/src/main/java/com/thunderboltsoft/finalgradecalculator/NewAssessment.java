@@ -1,8 +1,8 @@
 package com.thunderboltsoft.finalgradecalculator;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +52,10 @@ public class NewAssessment extends Fragment {
             public void onClick(View v) {
 
                 // Switch back to the main fragment
-                getFragmentManager().beginTransaction().replace(R.id.main_screen, new MainFragment()).commit();
+                ViewPagerContainerFragment viewPagerFragment = new ViewPagerContainerFragment();
+                viewPagerFragment.setAssessmentView();
+
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, viewPagerFragment).commit();
 
                 // Get the values from the EditText fields
                 double weightDouble = Double.parseDouble(weight.getText().toString());
