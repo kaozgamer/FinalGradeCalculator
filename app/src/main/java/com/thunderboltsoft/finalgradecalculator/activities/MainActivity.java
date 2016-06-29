@@ -1,4 +1,4 @@
-package com.thunderboltsoft.finalgradecalculator;
+package com.thunderboltsoft.finalgradecalculator.activities;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -9,20 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.thunderboltsoft.finalgradecalculator.R;
+import com.thunderboltsoft.finalgradecalculator.adapters.ViewPagerAdapter;
+import com.thunderboltsoft.finalgradecalculator.fragments.MainFragment;
+import com.thunderboltsoft.finalgradecalculator.interfaces.ActivityCallbackInterface;
+import com.thunderboltsoft.finalgradecalculator.libs.SlidingTabLayout;
+import com.thunderboltsoft.finalgradecalculator.models.Assessment;
+import com.thunderboltsoft.finalgradecalculator.models.ListAssessments;
+
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ActivityCallbackInterface {
 
     private ListAssessments assessments;
-    private MainFragment mainFragment;
-
-    public int getNumAssessments() {
-        return assessments.getAssessments().size();
-    }
-
-    public String[] getAssessmentsList() {
-        return assessments.getAssessmentsDetailList();
-    }
 
     public List<Assessment> getAssessments() {
         return assessments.getAssessments();
@@ -63,15 +62,7 @@ public class MainActivity extends AppCompatActivity {
             sActionBar.setTitle("Grade Calculator");
         }
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//
-//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,myToolBar,R.string.app_name,R.string.app_name);
-//        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
         assessments = new ListAssessments();
-
-        mainFragment = new MainFragment();
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
@@ -94,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
-//        getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, new ViewPagerContainerFragment()).commit();
-
-        //getFragmentManager().beginTransaction().replace(R.id.main_screen, mainFragment, "Tag").addToBackStack(null).commit();
     }
 
 
@@ -110,16 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 

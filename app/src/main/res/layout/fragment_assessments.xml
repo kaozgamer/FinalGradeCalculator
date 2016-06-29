@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.thunderboltsoft.finalgradecalculator.AssessmentsFragment">
+    tools:context=".fragments.AssessmentsFragment">
 
     <TableRow
         android:id="@+id/tableRow"
@@ -22,7 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="grade"
+            android:text="mGrade"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="weight"
+            android:text="mWeight"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </TableRow>

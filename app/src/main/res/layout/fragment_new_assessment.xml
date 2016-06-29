@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.thunderboltsoft.finalgradecalculator.NewAssessment">
+    tools:context=".fragments.NewAssessmentDialogFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/weight"
+            android:text="@string/mWeight"
             android:id="@+id/lblEnterWeight"
             android:gravity="right"
             android:layout_weight="0.6"

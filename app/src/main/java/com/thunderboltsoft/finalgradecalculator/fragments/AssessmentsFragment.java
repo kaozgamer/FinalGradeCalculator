@@ -1,4 +1,4 @@
-package com.thunderboltsoft.finalgradecalculator;
+package com.thunderboltsoft.finalgradecalculator.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
+import com.thunderboltsoft.finalgradecalculator.R;
+import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
+import com.thunderboltsoft.finalgradecalculator.adapters.ListAdapter;
+import com.thunderboltsoft.finalgradecalculator.models.Assessment;
 
 public class AssessmentsFragment extends Fragment {
 
@@ -28,7 +32,6 @@ public class AssessmentsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.pager, new NewAssessment()).commit();
                 NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(0);
                 newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
             }
@@ -46,11 +49,6 @@ public class AssessmentsFragment extends Fragment {
                 newAssessmentDialogFragment.setFromListView(p);
 
                 newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
-
-//                NewAssessment fragment = new NewAssessment();
-//                fragment.setFromListView(p);
-
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, fragment).commit();
 
                 listAdapter.remove(p);
                 listAdapter.notifyDataSetChanged();

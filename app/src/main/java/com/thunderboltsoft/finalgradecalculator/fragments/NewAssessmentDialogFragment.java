@@ -1,4 +1,4 @@
-package com.thunderboltsoft.finalgradecalculator;
+package com.thunderboltsoft.finalgradecalculator.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.thunderboltsoft.finalgradecalculator.R;
+import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
+import com.thunderboltsoft.finalgradecalculator.models.Assessment;
 
 /**
  * Created by Thushan on 29-Jun-16.

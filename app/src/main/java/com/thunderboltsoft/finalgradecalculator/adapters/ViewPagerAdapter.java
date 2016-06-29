@@ -1,4 +1,4 @@
-package com.thunderboltsoft.finalgradecalculator;
+package com.thunderboltsoft.finalgradecalculator.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.thunderboltsoft.finalgradecalculator.fragments.AssessmentsFragment;
+import com.thunderboltsoft.finalgradecalculator.fragments.MainFragment;
 
 /**
  * Created by hp1 on 21-01-2015.

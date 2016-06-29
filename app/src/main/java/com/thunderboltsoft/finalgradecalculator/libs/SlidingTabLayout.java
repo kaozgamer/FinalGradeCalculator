@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.thunderboltsoft.finalgradecalculator;
+package com.thunderboltsoft.finalgradecalculator.libs;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -30,6 +30,12 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+/**
+ * Taken from the Google IO 2015 Android App.
+ *
+ * @see <a href="https://github.com/google/iosched">https://github.com/google/iosched</a>
+ */
 
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to

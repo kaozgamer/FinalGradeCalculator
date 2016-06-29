@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.thunderboltsoft.finalgradecalculator;
+package com.thunderboltsoft.finalgradecalculator.libs;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -25,6 +25,11 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
+/**
+ * Taken from the Google IO 2015 Android App.
+ *
+ * @see <a href="https://github.com/google/iosched">https://github.com/google/iosched</a>
+ */
 class SlidingTabStrip extends LinearLayout {
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;
