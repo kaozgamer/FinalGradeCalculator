@@ -14,10 +14,16 @@ import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
 import com.thunderboltsoft.finalgradecalculator.adapters.ListAdapter;
 import com.thunderboltsoft.finalgradecalculator.models.Assessment;
 
+/**
+ * Fragment that contains the list of assessments that the user have entered.
+ * User is able to edit an assessment by clicking on that item in the list.
+ */
 public class AssessmentsFragment extends Fragment {
 
+    /**
+     * Required public constructor.
+     */
     public AssessmentsFragment() {
-
     }
 
     @Override
@@ -28,10 +34,12 @@ public class AssessmentsFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_assessments, container, false);
 
+        // Set floating action button which will allow user to add a new assessment
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Show the new assessment fragment in a dialog box
                 NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(0);
                 newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
             }
@@ -39,6 +47,7 @@ public class AssessmentsFragment extends Fragment {
 
         final ListAdapter listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, main.getAssessments());
 
+        // Add onClick listener to the list, so that user can edit individual assessments
         final ListView mainList = (ListView) view.findViewById(R.id.assessmentListView);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -50,7 +59,7 @@ public class AssessmentsFragment extends Fragment {
 
                 newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
 
-                listAdapter.remove(p);
+                listAdapter.remove(p); // Remove it, easier to delete if user does not want it
                 listAdapter.notifyDataSetChanged();
             }
         });

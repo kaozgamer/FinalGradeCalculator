@@ -17,24 +17,26 @@ import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
 
 import java.util.Locale;
 
+/**
+ * The main fragment that allows user to enter/view the current weighted grade and the desired grade.
+ * It will then display what the user needs to get in the remaining assessment to achieve the desired grade.
+ */
 public class MainFragment extends Fragment {
 
     /**
-     * EditText where we display/store the user's desired grade
+     * EditText where we display/store the user's desired grade.
      */
     private EditText mEditTextDesiredGrade;
 
     /**
-     * Stores the user's current grade. Supplied by the user or calculated by the list
+     * Stores the user's current grade. Supplied by the user or calculated by the list.
      */
     private EditText mTextView;
 
     /**
-     * Displays the grade the user needs to achieve in order to achieve their desired grade
+     * Displays the grade the user needs to achieve in order to achieve their desired grade.
      */
     private TextView mDesiredExamGrade;
-
-    private SwitchCompat switchCompat;
 
     /**
      * Required default constructor
@@ -42,14 +44,6 @@ public class MainFragment extends Fragment {
     public MainFragment() {
     }
 
-    /**
-     * Things to do once the this view is being created
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,15 +56,13 @@ public class MainFragment extends Fragment {
         String currentGrade = String.format(Locale.getDefault(), "%.2f", main.getCurrentGrade());
         mTextView.setText(currentGrade); // Set user's current grade to 2 decimal places
 
-//        ViewPager mPager = (ViewPager) view.findViewById(R.id.viewPager);
-
-        switchCompat = (SwitchCompat) view.findViewById(R.id.switchCurrentGrade);
+        SwitchCompat switchCompat = (SwitchCompat) view.findViewById(R.id.switchCurrentGrade);
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    // TODO: Enable EditText to allow user to enter the current weighted grade
                 }
             }
         });
@@ -101,7 +93,12 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Updates the TextView containing the user's current weighted grade.
+     *
+     * @param currentGrade current weighted grade
+     */
     public void updateCurrentGrade(double currentGrade) {
-        mTextView.setText(String.format(Locale.getDefault(), "%.2f", currentGrade));
+        mTextView.setText(String.format(Locale.getDefault(), "%.2f", currentGrade)); // 2 decimal places
     }
 }

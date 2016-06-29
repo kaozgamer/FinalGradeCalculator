@@ -18,20 +18,47 @@ import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
 import com.thunderboltsoft.finalgradecalculator.models.Assessment;
 
 /**
- * Created by Thushan on 29-Jun-16.
+ * Represents the dialog fragment that will hold the "Add new assessment" fragment.
+ * User can use this to enter the weight and grade of an assessment.
+ *
+ * @author Thushan Perera
  */
 public class NewAssessmentDialogFragment extends DialogFragment {
-    private EditText weight;
-    private EditText grade;
-    public Assessment p;
 
-    public void setFromListView(Assessment p) {
-        this.p = p;
+    /**
+     * The EditText box for user to enter the weighting of assessment.
+     */
+    private EditText mWeight;
+
+    /**
+     * The EditText box for user to enter the grade of the assessment.
+     */
+    private EditText mGrade;
+
+    /**
+     * The assessment to be added.
+     */
+    public Assessment mAssessment;
+
+    /**
+     * Sets the assessments from an existing assessment.
+     *
+     * @param assessment existing assessment
+     */
+    public void setFromListView(Assessment assessment) {
+        mAssessment = assessment;
     }
 
+    /**
+     * Create a new NewAssessmentDialogFragment fragment.
+     *
+     * @param myIndex params
+     * @return new fragment
+     */
     public static NewAssessmentDialogFragment newInstance(int myIndex) {
         NewAssessmentDialogFragment newAssessmentDialogFragment = new NewAssessmentDialogFragment();
 
+        // Just to test Bundles
         Bundle args = new Bundle();
         args.putInt("anIntToSend", myIndex);
         newAssessmentDialogFragment.setArguments(args);
@@ -46,26 +73,28 @@ public class NewAssessmentDialogFragment extends DialogFragment {
 
         final View view = inflater.inflate(R.layout.fragment_new_assessment, null);
 
-        weight = (EditText) view.findViewById(R.id.txtEnterWeight);
-        grade = (EditText) view.findViewById(R.id.txtEnterGrade);
+        mWeight = (EditText) view.findViewById(R.id.txtEnterWeight);
+        mGrade = (EditText) view.findViewById(R.id.txtEnterGrade);
 
-        if (p != null) {
-            weight.setText(String.valueOf(p.getWeight()));
-            grade.setText(String.valueOf(p.getGrade()));
+        // If assessment is given, populate EditText values from that
+        if (mAssessment != null) {
+            mWeight.setText(String.valueOf(mAssessment.getWeight()));
+            mGrade.setText(String.valueOf(mAssessment.getGrade()));
         }
 
+        // Add OK and Cancel buttons to our dialog
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
                 .setTitle("Add Assessment Grade")
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // Do something
-                                double weightDouble = Double.parseDouble(weight.getText().toString());
-                                double gradeDouble = Double.parseDouble(grade.getText().toString());
+                                double weightDouble = Double.parseDouble(mWeight.getText().toString());
+                                double gradeDouble = Double.parseDouble(mGrade.getText().toString());
 
                                 Assessment newAssessment = new Assessment(weightDouble, gradeDouble);
 
+                                // Send the assessment to the activity to be added to the list of assessments
                                 MainActivity activity = (MainActivity) getActivity();
                                 if (newAssessment.isValid()) {
                                     activity.sendAssessment(newAssessment);
@@ -83,7 +112,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                                dialog.dismiss(); // Do not do anything with the user entered values
                             }
                         }
                 );
