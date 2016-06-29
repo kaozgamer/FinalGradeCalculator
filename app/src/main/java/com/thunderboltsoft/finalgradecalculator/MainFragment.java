@@ -97,4 +97,8 @@ public class MainFragment extends Fragment {
 
         return view;
     }
+
+    public void updateCurrentGrade(double currentGrade) {
+        mTextView.setText(String.format(Locale.getDefault(), "%.2f", currentGrade));
+    }
 }

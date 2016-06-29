@@ -55,7 +55,7 @@ public class NewAssessment extends Fragment {
                 ViewPagerContainerFragment viewPagerFragment = new ViewPagerContainerFragment();
                 viewPagerFragment.setAssessmentView();
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, viewPagerFragment).commit();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, viewPagerFragment).commit();
 
                 // Get the values from the EditText fields
                 double weightDouble = Double.parseDouble(weight.getText().toString());

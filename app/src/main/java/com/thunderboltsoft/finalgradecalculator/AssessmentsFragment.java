@@ -28,7 +28,9 @@ public class AssessmentsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, new NewAssessment()).commit();
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.pager, new NewAssessment()).commit();
+                NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(0);
+                newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
             }
         });
 
@@ -40,10 +42,15 @@ public class AssessmentsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Assessment p = (Assessment) mainList.getItemAtPosition(position);
 
-                NewAssessment fragment = new NewAssessment();
-                fragment.setFromListView(p);
+                NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(0);
+                newAssessmentDialogFragment.setFromListView(p);
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, fragment).commit();
+                newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
+
+//                NewAssessment fragment = new NewAssessment();
+//                fragment.setFromListView(p);
+
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_screen, fragment).commit();
 
                 listAdapter.remove(p);
                 listAdapter.notifyDataSetChanged();
