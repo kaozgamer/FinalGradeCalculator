@@ -20,6 +20,8 @@ import java.util.Locale;
 /**
  * The main fragment that allows user to enter/view the current weighted grade and the desired grade.
  * It will then display what the user needs to get in the remaining assessment to achieve the desired grade.
+ *
+ * @author Thushan Perera
  */
 public class MainFragment extends Fragment {
 

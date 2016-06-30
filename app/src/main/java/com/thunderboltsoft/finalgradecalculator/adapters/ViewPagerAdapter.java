@@ -11,72 +11,120 @@ import com.thunderboltsoft.finalgradecalculator.fragments.AssessmentsFragment;
 import com.thunderboltsoft.finalgradecalculator.fragments.MainFragment;
 
 /**
- * Created by hp1 on 21-01-2015.
+ * Provides the views for every page in every tab.
+ * <p/>
+ * Based on code by Akash Bangad from "Android For Devs".
+ *
+ * @author Thushan Perera
+ * @see <a href="http://www.android4devs.com/2015/01/how-to-make-material-design-sliding-tabs.html">How To Make Material Design Sliding Tabs</a>
  */
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
-    int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
+    /**
+     * Stores titles of each tab.
+     */
+    private CharSequence mTitles[];
 
-    SparseArray<Fragment> registeredFragments = new SparseArray<>();
+    /**
+     * Number of tabs.
+     */
+    private int mNumTabs;
 
+    /**
+     * Holds the fragments that have been instantiated and registered to this view pager.
+     */
+    private SparseArray<Fragment> mRegisteredFragments = new SparseArray<>();
 
-    // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb) {
+    /**
+     * Public constructor and assign passed values.
+     *
+     * @param fm      the fragment manager
+     * @param titles  the titles for each page
+     * @param numTabs number of pages
+     */
+    public ViewPagerAdapter(FragmentManager fm, CharSequence titles[], int numTabs) {
         super(fm);
 
-        this.Titles = mTitles;
-        this.NumbOfTabs = mNumbOfTabsumb;
+        mTitles = titles;
+        mNumTabs = numTabs;
 
     }
 
-    //This method return the fragment for the every position in the View Pager
+    /**
+     * Returns the fragment for every position in the ViewPager.
+     *
+     * @param position position of fragment
+     * @return the fragment at that position
+     */
     @Override
     public Fragment getItem(int position) {
 
-        if (position == 0) // if the position is 0 we are returning the First tab
-        {
+        if (position == 0) {
             MainFragment mainFragment = new MainFragment();
-            registeredFragments.put(position, mainFragment);
+            mRegisteredFragments.put(position, mainFragment); // Save the fragment
             return mainFragment;
-        } else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
-        {
+        } else {
             AssessmentsFragment assessmentsFragment = new AssessmentsFragment();
-            registeredFragments.put(position, assessmentsFragment);
+            mRegisteredFragments.put(position, assessmentsFragment); // Save the fragment
             return assessmentsFragment;
         }
-
-
     }
 
-    // This method return the titles for the Tabs in the Tab Strip
-
+    /**
+     * Return the title of the tab in the TabStrip
+     *
+     * @param position position of tab
+     * @return title of tab
+     */
     @Override
     public CharSequence getPageTitle(int position) {
-        return Titles[position];
+        return mTitles[position];
     }
 
-    // This method return the Number of tabs for the tabs Strip
-
+    /**
+     * Returns the number of tabs in ViewPager.
+     *
+     * @return number of tabs
+     */
     @Override
     public int getCount() {
-        return NumbOfTabs;
+        return mNumTabs;
     }
 
+    /**
+     * Instantiates a fragment and stores its reference for later use.
+     *
+     * @param container the container containing the fragment
+     * @param position  position of fragment
+     * @return the fragment
+     */
     @Override
     public Object instantiateItem(View container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        registeredFragments.put(position, fragment);
+        mRegisteredFragments.put(position, fragment);
         return fragment;
     }
 
+    /**
+     * Destroys the fragment at a position.
+     *
+     * @param container container containing the view
+     * @param position  position of fragment
+     * @param object    the fragment
+     */
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        registeredFragments.remove(position);
+        mRegisteredFragments.remove(position);
         super.destroyItem(container, position, object);
     }
 
+    /**
+     * Retrieves the reference to a fragment at a given position.
+     *
+     * @param position position of fragment
+     * @return the fragment
+     */
     public Fragment getRegisteredFragment(int position) {
-        return registeredFragments.valueAt(position);
+        return mRegisteredFragments.valueAt(position);
     }
 }

@@ -17,6 +17,8 @@ import com.thunderboltsoft.finalgradecalculator.models.Assessment;
 /**
  * Fragment that contains the list of assessments that the user have entered.
  * User is able to edit an assessment by clicking on that item in the list.
+ *
+ * @author Thushan Perera
  */
 public class AssessmentsFragment extends Fragment {
 

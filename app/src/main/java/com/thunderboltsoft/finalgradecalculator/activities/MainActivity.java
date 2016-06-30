@@ -19,33 +19,81 @@ import com.thunderboltsoft.finalgradecalculator.models.ListAssessments;
 
 import java.util.List;
 
+/**
+ * Main activity class for the app.
+ *
+ * @author Thushan Perera
+ */
 public class MainActivity extends AppCompatActivity implements ActivityCallbackInterface {
 
-    private ListAssessments assessments;
+    /**
+     * Holds the list of assessments (each containing the grade and weight for that assessment), entered by the user.
+     */
+    private ListAssessments mAssessments;
 
+    /**
+     * View that contains multiple pages(tabs).
+     */
+    private ViewPager mPager;
+
+    /**
+     * Our adapter we use to convert our data and fill into the ViewPager.
+     */
+    private ViewPagerAdapter mAdapter;
+
+    /**
+     * The view for our tabs.
+     */
+    private SlidingTabLayout mTabs;
+
+    /**
+     * The title for our tabs.
+     */
+    private CharSequence mTitles[] = {"Calculator", "Assessments"};
+
+    /**
+     * The number of tabs.
+     */
+    private int mNumTabs = 2;
+
+    /**
+     * Gets and returns the list of assessments entered by the user.
+     *
+     * @return list of assessments
+     */
     public List<Assessment> getAssessments() {
-        return assessments.getAssessments();
+        return mAssessments.getAssessments();
     }
 
+    /**
+     * Get and return the final grade needed to achieve the desired grade.
+     * @param desiredGrade the desired grade as percentage
+     * @return the grade needed as a percentage
+     */
     public double getGradeNeeded(double desiredGrade) {
-        return assessments.calcGradeNeeded(desiredGrade);
+        return mAssessments.calcGradeNeeded(desiredGrade);
     }
 
+    /**
+     * Get and return the current grades for all the assessments entered by user.
+     * @return the current weighted grade
+     */
     public double getCurrentGrade() {
-        return assessments.getCurrentGrade();
+        return mAssessments.getCurrentGrade();
     }
 
-    public void sendAssessment(Assessment as) {
-        assessments.addAssessment(as);
-        MainFragment mainFragment = (MainFragment) adapter.getRegisteredFragment(0);
-        mainFragment.updateCurrentGrade(assessments.getCurrentGrade());
+    /**
+     * Sends an assessment to the main activity.
+     * <p/>
+     * TODO: Refactor and send this as a callback
+     *
+     * @param assessment the assessment
+     */
+    public void sendAssessment(Assessment assessment) {
+        mAssessments.addAssessment(assessment);
+        MainFragment mainFragment = (MainFragment) mAdapter.getRegisteredFragment(0);
+        mainFragment.updateCurrentGrade(mAssessments.getCurrentGrade());
     }
-
-    ViewPager pager;
-    ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[] = {"Calculator", "Assessments"};
-    int Numboftabs = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,21 +110,21 @@ public class MainActivity extends AppCompatActivity implements ActivityCallbackI
             sActionBar.setTitle("Grade Calculator");
         }
 
-        assessments = new ListAssessments();
+        mAssessments = new ListAssessments();
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
+        mAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mTitles, mNumTabs);
 
         // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(mAdapter);
 
         // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        mTabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
 
         // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        mTabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
                 return getResources().getColor(R.color.colorAccent);
@@ -84,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallbackI
         });
 
         // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
+        mTabs.setViewPager(mPager);
     }
 
 

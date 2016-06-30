@@ -38,7 +38,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
     /**
      * The assessment to be added.
      */
-    public Assessment mAssessment;
+    private Assessment mAssessment;
 
     /**
      * Sets the assessments from an existing assessment.
