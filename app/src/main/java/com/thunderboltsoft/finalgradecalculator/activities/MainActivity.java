@@ -156,4 +156,12 @@ public class MainActivity extends AppCompatActivity implements ActivityCallbackI
             super.onBackPressed();
         }
     }
+
+    public ViewPager getViewPager() {
+        return mPager;
+    }
+
+    public ViewPagerAdapter getViewPagerAdapter() {
+        return mAdapter;
+    }
 }

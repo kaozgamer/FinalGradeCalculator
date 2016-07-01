@@ -2,6 +2,7 @@ package com.thunderboltsoft.finalgradecalculator.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.thunderboltsoft.finalgradecalculator.R;
 import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
+import com.thunderboltsoft.finalgradecalculator.adapters.ViewPagerAdapter;
 
 import java.util.Locale;
 
@@ -41,6 +43,11 @@ public class MainFragment extends Fragment {
     private TextView mDesiredExamGrade;
 
     /**
+     * SwitchCompat that indicates whether or not the user knows their current weighted grade.
+     */
+    private SwitchCompat mSwitchCompat;
+
+    /**
      * Required default constructor
      */
     public MainFragment() {
@@ -58,13 +65,18 @@ public class MainFragment extends Fragment {
         String currentGrade = String.format(Locale.getDefault(), "%.2f", main.getCurrentGrade());
         mTextView.setText(currentGrade); // Set user's current grade to 2 decimal places
 
-        SwitchCompat switchCompat = (SwitchCompat) view.findViewById(R.id.switchCurrentGrade);
-        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mSwitchCompat = (SwitchCompat) view.findViewById(R.id.switchCurrentGrade);
+        mSwitchCompat.setChecked(true); // Default is assuming user knows their grade
+        mSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // TODO: Enable EditText to allow user to enter the current weighted grade
+                if (!isChecked) {
+                    // Switch to the assessments tab
+                    ViewPager pager = main.getViewPager();
+                    pager.setCurrentItem(2);
+                    ViewPagerAdapter adapter = main.getViewPagerAdapter();
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
