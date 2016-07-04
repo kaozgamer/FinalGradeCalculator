@@ -143,6 +143,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
 
         // Setting the ViewPager For the SlidingTabsLayout
         mTabs.setViewPager(mPager);
+
+        // Default is the switch compat is on
+        disableViewPager();
     }
 
 
