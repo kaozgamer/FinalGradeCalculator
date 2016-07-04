@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
      */
     private SlidingTabLayout mTabs;
 
+
     /**
      * The title for our tabs.
      */
@@ -169,12 +170,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     @Override
     public void disableViewPager() {
         mPager.beginFakeDrag();
+        mTabs.setEnableTabsClick(false);
     }
 
     @Override
     public void enableViewPager() {
         mPager.beginFakeDrag();
         mPager.endFakeDrag();
+        mTabs.setEnableTabsClick(true);
     }
 
     @Override

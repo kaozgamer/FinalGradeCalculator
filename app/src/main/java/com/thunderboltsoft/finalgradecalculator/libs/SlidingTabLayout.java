@@ -324,4 +324,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
         }
     }
 
+    public void setEnableTabsClick(boolean enable) {
+        mTabStrip.setIsTabSwitchEnabled(enable);
+    }
+
 }

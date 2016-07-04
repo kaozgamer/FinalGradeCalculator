@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -49,8 +50,15 @@ class SlidingTabStrip extends LinearLayout {
     private SlidingTabLayout.TabColorizer mCustomTabColorizer;
     private final SimpleTabColorizer mDefaultTabColorizer;
 
+    /**
+     * Indicates if the tab strip is to be enabled or not.
+     */
+    private boolean mIsTabSwitchEnabled;
+
     SlidingTabStrip(Context context) {
         this(context, null);
+
+        mIsTabSwitchEnabled = true;
     }
 
     SlidingTabStrip(Context context, AttributeSet attrs) {
@@ -75,6 +83,8 @@ class SlidingTabStrip extends LinearLayout {
 
         mSelectedIndicatorThickness = (int) (SELECTED_INDICATOR_THICKNESS_DIPS * density);
         mSelectedIndicatorPaint = new Paint();
+
+        mIsTabSwitchEnabled = true;
     }
 
     void setCustomTabColorizer(SlidingTabLayout.TabColorizer customTabColorizer) {
@@ -165,6 +175,19 @@ class SlidingTabStrip extends LinearLayout {
 
         void setIndicatorColors(int... colors) {
             mIndicatorColors = colors;
+        }
+    }
+
+    public void setIsTabSwitchEnabled(boolean enabled) {
+        mIsTabSwitchEnabled = enabled;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (mIsTabSwitchEnabled) {
+            return super.onInterceptTouchEvent(ev);
+        } else {
+            return true;
         }
     }
 }
