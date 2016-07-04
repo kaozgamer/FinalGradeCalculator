@@ -13,4 +13,5 @@
     <string name="switch_description">Do you know your current grade?</string>
     <string name="assessments_list_weight">Weight</string>
     <string name="assessments_list_grade">Grade</string>
+    <string name="final_grade_weight">Final Weight:</string>
 </resources>

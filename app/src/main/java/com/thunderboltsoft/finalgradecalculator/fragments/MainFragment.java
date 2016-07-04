@@ -1,8 +1,10 @@
 package com.thunderboltsoft.finalgradecalculator.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,10 +16,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.thunderboltsoft.finalgradecalculator.R;
-import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
-import com.thunderboltsoft.finalgradecalculator.adapters.ViewPagerAdapter;
+import com.thunderboltsoft.finalgradecalculator.interfaces.ActivityCallback;
 
 import java.util.Locale;
+
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 /**
  * The main fragment that allows user to enter/view the current weighted grade and the desired grade.
@@ -48,6 +51,11 @@ public class MainFragment extends Fragment {
     private SwitchCompat mSwitchCompat;
 
     /**
+     * Interface to allow callback to the activity.
+     */
+    private ActivityCallback mCallbackActivity;
+
+    /**
      * Required default constructor
      */
     public MainFragment() {
@@ -56,14 +64,14 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final MainActivity main = (MainActivity) getActivity();
-
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
         mTextView = (EditText) view.findViewById(R.id.textView);
 
-        String currentGrade = String.format(Locale.getDefault(), "%.2f", main.getCurrentGrade());
+        String currentGrade = String.format(Locale.getDefault(), "%.2f", mCallbackActivity.getCurrentGrade());
         mTextView.setText(currentGrade); // Set user's current grade to 2 decimal places
+
+        final TextInputLayout finalGradeWeightLinearLayout = (TextInputLayout) view.findViewById(R.id.input_layout_final_weight);
+        final EditText txtFinalGradeWeight = (EditText) view.findViewById(R.id.editTextFinalGradeWeight);
 
         mSwitchCompat = (SwitchCompat) view.findViewById(R.id.switchCurrentGrade);
         mSwitchCompat.setChecked(true); // Default is assuming user knows their grade
@@ -72,11 +80,16 @@ public class MainFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (!isChecked) {
+                    finalGradeWeightLinearLayout.setVisibility(View.INVISIBLE);
+
                     // Switch to the assessments tab
-                    ViewPager pager = main.getViewPager();
-                    pager.setCurrentItem(2);
-                    ViewPagerAdapter adapter = main.getViewPagerAdapter();
-                    adapter.notifyDataSetChanged();
+                    mCallbackActivity.switchToAssessmentsTab();
+
+                    mCallbackActivity.enableViewPager();
+                } else {
+                    finalGradeWeightLinearLayout.setVisibility(View.VISIBLE);
+
+                    mCallbackActivity.disableViewPager();
                 }
             }
         });
@@ -91,7 +104,13 @@ public class MainFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!mEditTextDesiredGrade.getText().toString().equals("")) {
-                    double gradeNeeded = main.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()));
+                    double gradeNeeded;
+
+                    if (txtFinalGradeWeight.getText().toString().isEmpty()) {
+                        gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()));
+                    } else {
+                        gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()), Double.parseDouble(txtFinalGradeWeight.getText().toString()));
+                    }
 
                     mDesiredExamGrade = (TextView) view.findViewById(R.id.textViewDesiredResult);
                     String neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
@@ -104,6 +123,14 @@ public class MainFragment extends Fragment {
             }
         });
 
+        new MaterialShowcaseView.Builder(getActivity())
+                .setTarget(mSwitchCompat)
+                .setDismissText("GOT IT")
+                .setContentText("This is some amazing feature you should know about")
+                .setDelay(100) // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse("test") // provide a unique ID used to ensure it is only shown once
+                .show();
+
         return view;
     }
 
@@ -114,5 +141,16 @@ public class MainFragment extends Fragment {
      */
     public void updateCurrentGrade(double currentGrade) {
         mTextView.setText(String.format(Locale.getDefault(), "%.2f", currentGrade)); // 2 decimal places
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallbackActivity = (ActivityCallback) activity;
     }
 }

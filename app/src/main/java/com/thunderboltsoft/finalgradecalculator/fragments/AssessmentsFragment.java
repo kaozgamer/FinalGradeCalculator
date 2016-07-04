@@ -1,5 +1,6 @@
 package com.thunderboltsoft.finalgradecalculator.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,8 +11,8 @@ import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.thunderboltsoft.finalgradecalculator.R;
-import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
 import com.thunderboltsoft.finalgradecalculator.adapters.ListAdapter;
+import com.thunderboltsoft.finalgradecalculator.interfaces.ActivityCallback;
 import com.thunderboltsoft.finalgradecalculator.models.Assessment;
 
 /**
@@ -22,6 +23,8 @@ import com.thunderboltsoft.finalgradecalculator.models.Assessment;
  */
 public class AssessmentsFragment extends Fragment {
 
+    private ActivityCallback mCallbackActivity;
+
     /**
      * Required public constructor.
      */
@@ -31,9 +34,6 @@ public class AssessmentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        final MainActivity main = (MainActivity) getActivity();
-
         final View view = inflater.inflate(R.layout.fragment_assessments, container, false);
 
         // Set floating action button which will allow user to add a new assessment
@@ -47,7 +47,7 @@ public class AssessmentsFragment extends Fragment {
             }
         });
 
-        final ListAdapter listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, main.getAssessments());
+        final ListAdapter listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, mCallbackActivity.getAssessments());
 
         // Add onClick listener to the list, so that user can edit individual assessments
         final ListView mainList = (ListView) view.findViewById(R.id.assessmentListView);
@@ -69,5 +69,11 @@ public class AssessmentsFragment extends Fragment {
         mainList.setAdapter(listAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallbackActivity = (ActivityCallback) activity;
     }
 }

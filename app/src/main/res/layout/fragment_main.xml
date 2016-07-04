@@ -16,79 +16,177 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
         android:text="@string/switch_description"
         android:textOff="No"
         android:textOn="Yes" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutCurrentGrade"
+        android:id="@+id/linear_layout_current_desired"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/switchCurrentGrade"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_below="@id/switchCurrentGrade">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_current_grade"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:gravity="right"
-            android:paddingRight="0dp"
-            android:text="@string/current_grade"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_weight="1"
+            android:hint="Current Grade (%)">
+
+            <EditText
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_desired_grade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Desired Grade (%)">
+
+            <EditText
+                android:id="@+id/editTextDesiredGrade"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_final_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout_current_desired">
 
         <EditText
-            android:id="@+id/textView"
+            android:id="@+id/editTextFinalGradeWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:ems="6"
-            android:gravity="center"
-            android:hint="@string/percent"
+            android:hint="Weight of Exam (%)"
             android:inputType="numberDecimal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutDesiredGrade"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/linearLayoutCurrentGrade"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.6"
-            android:gravity="right"
-            android:paddingRight="0dp"
-            android:text="@string/desired_grade"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/editTextDesiredGrade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:ems="6"
-            android:gravity="center"
-            android:hint="@string/percent"
-            android:inputType="numberDecimal" />
-    </LinearLayout>
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/textViewDesiredResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayoutDesiredGrade"
+        android:layout_below="@id/input_layout_final_weight"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:hint="@string/desired_result_description"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/linearLayoutCurrentGrade"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_below="@+id/switchCurrentGrade"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.6"-->
+    <!--android:gravity="right"-->
+    <!--android:paddingRight="0dp"-->
+    <!--android:text="@string/current_grade"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+
+    <!--<android.support.design.widget.TextInputLayout-->
+    <!--android:id="@+id/input_layout_text_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--<EditText-->
+    <!--android:id="@+id/textView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.4"-->
+    <!--android:ems="6"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="@string/percent"-->
+    <!--android:inputType="numberDecimal" />-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/linearLayoutDesiredGrade"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_below="@+id/linearLayoutCurrentGrade"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.6"-->
+    <!--android:gravity="right"-->
+    <!--android:paddingRight="0dp"-->
+    <!--android:text="@string/desired_grade"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/editTextDesiredGrade"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.4"-->
+    <!--android:ems="6"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="@string/percent"-->
+    <!--android:inputType="numberDecimal" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/linearLayoutFinalGradeWeight"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_below="@+id/linearLayoutDesiredGrade"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView4"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.6"-->
+    <!--android:gravity="right"-->
+    <!--android:paddingRight="0dp"-->
+    <!--android:text="@string/final_grade_weight"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/editTextFinalGradeWeight"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.4"-->
+    <!--android:ems="6"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="@string/percent"-->
+    <!--android:inputType="numberDecimal" />-->
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textViewDesiredResult"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/linearLayoutFinalGradeWeight"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:gravity="center"-->
+    <!--android:hint="@string/desired_result_description"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
 
 
 </RelativeLayout>

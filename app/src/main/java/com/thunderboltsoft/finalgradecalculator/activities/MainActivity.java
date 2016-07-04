@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.thunderboltsoft.finalgradecalculator.R;
 import com.thunderboltsoft.finalgradecalculator.adapters.ViewPagerAdapter;
 import com.thunderboltsoft.finalgradecalculator.fragments.MainFragment;
-import com.thunderboltsoft.finalgradecalculator.interfaces.ActivityCallbackInterface;
+import com.thunderboltsoft.finalgradecalculator.interfaces.ActivityCallback;
 import com.thunderboltsoft.finalgradecalculator.libs.SlidingTabLayout;
 import com.thunderboltsoft.finalgradecalculator.models.Assessment;
 import com.thunderboltsoft.finalgradecalculator.models.ListAssessments;
@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Thushan Perera
  */
-public class MainActivity extends AppCompatActivity implements ActivityCallbackInterface {
+public class MainActivity extends AppCompatActivity implements ActivityCallback {
 
     /**
      * Holds the list of assessments (each containing the grade and weight for that assessment), entered by the user.
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallbackI
      *
      * @return list of assessments
      */
+    @Override
     public List<Assessment> getAssessments() {
         return mAssessments.getAssessments();
     }
@@ -70,14 +71,21 @@ public class MainActivity extends AppCompatActivity implements ActivityCallbackI
      * @param desiredGrade the desired grade as percentage
      * @return the grade needed as a percentage
      */
+    @Override
     public double getGradeNeeded(double desiredGrade) {
         return mAssessments.calcGradeNeeded(desiredGrade);
+    }
+
+    @Override
+    public double getGradeNeeded(double desiredGrade, double finalGradeWeight) {
+        return 0;
     }
 
     /**
      * Get and return the current grades for all the assessments entered by user.
      * @return the current weighted grade
      */
+    @Override
     public double getCurrentGrade() {
         return mAssessments.getCurrentGrade();
     }
@@ -121,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallbackI
 
         // Assiging the Sliding Tab Layout View
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
+
         mTabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
 
         // Setting Custom Color for the Scroll bar indicator of the Tab View
@@ -157,11 +166,25 @@ public class MainActivity extends AppCompatActivity implements ActivityCallbackI
         }
     }
 
-    public ViewPager getViewPager() {
-        return mPager;
+    @Override
+    public void disableViewPager() {
+        mPager.beginFakeDrag();
     }
 
-    public ViewPagerAdapter getViewPagerAdapter() {
-        return mAdapter;
+    @Override
+    public void enableViewPager() {
+        mPager.beginFakeDrag();
+        mPager.endFakeDrag();
+    }
+
+    @Override
+    public void switchToAssessmentsTab() {
+        mPager.post(new Runnable() {
+            @Override
+            public void run() {
+                mPager.setCurrentItem(2);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }
