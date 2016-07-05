@@ -93,4 +93,20 @@ public class Assessment {
     public boolean isValid() {
         return mValid;
     }
+
+    public boolean isGradeValid() {
+        if ((mGrade > 100) || (mGrade < 0)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean isWeightValid() {
+        if ((mWeight <= 0) || (mWeight > 100)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

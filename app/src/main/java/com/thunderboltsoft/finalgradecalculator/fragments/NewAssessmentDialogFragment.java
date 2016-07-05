@@ -10,8 +10,8 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.thunderboltsoft.finalgradecalculator.R;
 import com.thunderboltsoft.finalgradecalculator.activities.MainActivity;
@@ -89,22 +89,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                double weightDouble = Double.parseDouble(mWeight.getText().toString());
-                                double gradeDouble = Double.parseDouble(mGrade.getText().toString());
-
-                                Assessment newAssessment = new Assessment(weightDouble, gradeDouble);
-
-                                // Send the assessment to the activity to be added to the list of assessments
-                                MainActivity activity = (MainActivity) getActivity();
-                                if (newAssessment.isValid()) {
-                                    activity.sendAssessment(newAssessment);
-                                } else {
-                                    Toast.makeText(getActivity(), "Invalid values detected", Toast.LENGTH_SHORT).show();
-                                }
-
-                                // Hide the soft keyboard - annoying
-                                InputMethodManager imm = (InputMethodManager) activity.getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                                // Do Nothing
                             }
                         }
                 )
@@ -120,5 +105,71 @@ public class NewAssessmentDialogFragment extends DialogFragment {
         b.setView(view);
 
         return b.create();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        AlertDialog d = (AlertDialog) getDialog();
+        if (d != null) {
+            Button positiveButton = (Button) d.getButton(Dialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean shouldDismiss = true;
+
+                    if (mGrade.getText().toString().isEmpty()) {
+                        mGrade.setError("Invalid Value");
+                        shouldDismiss = false;
+                    }
+
+                    if (mWeight.getText().toString().isEmpty()) {
+                        mWeight.setError("Invalid Value");
+                        shouldDismiss = false;
+                    }
+
+                    if (!shouldDismiss) {
+                        return;
+                    }
+
+                    double weightDouble = Double.parseDouble(mWeight.getText().toString());
+                    double gradeDouble = Double.parseDouble(mGrade.getText().toString());
+
+                    View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_new_assessment, null);
+
+                    Assessment newAssessment = new Assessment(weightDouble, gradeDouble);
+
+                    // Send the assessment to the activity to be added to the list of assessments
+                    MainActivity activity = (MainActivity) getActivity();
+
+                    if (newAssessment.isGradeValid()) {
+                        mGrade.setError(null);
+                    } else {
+                        mGrade.setError("Invalid Value");
+                        shouldDismiss = false;
+                    }
+
+                    if (newAssessment.isWeightValid()) {
+                        mWeight.setError(null);
+                    } else {
+                        mWeight.setError("Invalid Value");
+                        shouldDismiss = false;
+                    }
+
+                    if (newAssessment.isValid()) {
+                        activity.sendAssessment(newAssessment);
+                    }
+
+                    // Hide the soft keyboard - annoying
+                    InputMethodManager imm = (InputMethodManager) activity.getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                    if (shouldDismiss) {
+                        dismiss();
+                    }
+                }
+            });
+        }
     }
 }

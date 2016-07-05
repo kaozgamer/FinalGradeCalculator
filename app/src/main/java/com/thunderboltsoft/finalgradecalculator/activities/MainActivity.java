@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-        // Assiging the Sliding Tab Layout View
+        // Assigning the Sliding Tab Layout View
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
 
         mTabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
