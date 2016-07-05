@@ -11,13 +11,10 @@
 
     <android.support.v7.widget.SwitchCompat
         android:id="@+id/switchCurrentGrade"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
         android:text="@string/switch_description"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:textOff="No"
         android:textOn="Yes" />
 
@@ -26,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_below="@id/switchCurrentGrade">
 
         <android.support.design.widget.TextInputLayout
@@ -77,116 +75,21 @@
         android:id="@+id/textViewDesiredResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/input_layout_final_weight"
+        android:layout_below="@+id/textViewResult"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:hint="@string/desired_result_description"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/linearLayoutCurrentGrade"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentEnd="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_below="@+id/switchCurrentGrade"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView2"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.6"-->
-    <!--android:gravity="right"-->
-    <!--android:paddingRight="0dp"-->
-    <!--android:text="@string/current_grade"-->
-    <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
-
-    <!--<android.support.design.widget.TextInputLayout-->
-    <!--android:id="@+id/input_layout_text_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
-    <!--<EditText-->
-    <!--android:id="@+id/textView"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.4"-->
-    <!--android:ems="6"-->
-    <!--android:gravity="center"-->
-    <!--android:hint="@string/percent"-->
-    <!--android:inputType="numberDecimal" />-->
-    <!--</android.support.design.widget.TextInputLayout>-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/linearLayoutDesiredGrade"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentEnd="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_below="@+id/linearLayoutCurrentGrade"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView3"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.6"-->
-    <!--android:gravity="right"-->
-    <!--android:paddingRight="0dp"-->
-    <!--android:text="@string/desired_grade"-->
-    <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/editTextDesiredGrade"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.4"-->
-    <!--android:ems="6"-->
-    <!--android:gravity="center"-->
-    <!--android:hint="@string/percent"-->
-    <!--android:inputType="numberDecimal" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/linearLayoutFinalGradeWeight"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentEnd="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_below="@+id/linearLayoutDesiredGrade"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView4"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.6"-->
-    <!--android:gravity="right"-->
-    <!--android:paddingRight="0dp"-->
-    <!--android:text="@string/final_grade_weight"-->
-    <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/editTextFinalGradeWeight"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.4"-->
-    <!--android:ems="6"-->
-    <!--android:gravity="center"-->
-    <!--android:hint="@string/percent"-->
-    <!--android:inputType="numberDecimal" />-->
-    <!--</LinearLayout>-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textViewDesiredResult"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/linearLayoutFinalGradeWeight"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:gravity="center"-->
-    <!--android:hint="@string/desired_result_description"-->
-    <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="112sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textViewResult"
+        android:layout_below="@id/input_layout_final_weight"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

@@ -94,6 +94,8 @@ public class MainFragment extends Fragment {
             }
         });
 
+        final TextView txtGradeNeeded = (TextView) view.findViewById(R.id.textViewResult);
+
         // As user's enters desired grade, calculate final exam grade needed to achieve that
         mEditTextDesiredGrade = (EditText) view.findViewById(R.id.editTextDesiredGrade);
         mEditTextDesiredGrade.addTextChangedListener(new TextWatcher() { // Text change listener so no need for a button
@@ -112,8 +114,11 @@ public class MainFragment extends Fragment {
                         gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()), Double.parseDouble(txtFinalGradeWeight.getText().toString()));
                     }
 
+                    String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
+                    txtGradeNeeded.setText(neededGrade);
+
                     mDesiredExamGrade = (TextView) view.findViewById(R.id.textViewDesiredResult);
-                    String neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
+                    neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
                     mDesiredExamGrade.setText(neededGrade);
                 }
             }
