@@ -18,7 +18,7 @@ public interface ActivityCallback {
 
     double getGradeNeeded(double desiredGrade);
 
-    double getGradeNeeded(double desiredGrade, double finalGradeWeight);
+    double getGradeNeeded(double currentGrade, double desiredGrade, double finalGradeWeight);
 
     double getCurrentGrade();
 

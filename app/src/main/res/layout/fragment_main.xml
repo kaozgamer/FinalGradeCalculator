@@ -85,7 +85,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="112sp"
+        android:textSize="50sp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewResult"
         android:layout_below="@id/input_layout_final_weight"

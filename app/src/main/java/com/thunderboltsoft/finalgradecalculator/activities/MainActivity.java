@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     }
 
     @Override
-    public double getGradeNeeded(double desiredGrade, double finalGradeWeight) {
-        return 0;
+    public double getGradeNeeded(double currentGrade, double desiredGrade, double finalGradeWeight) {
+        return mAssessments.calcGradeNeeded(currentGrade, desiredGrade, finalGradeWeight);
     }
 
     /**

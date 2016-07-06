@@ -88,4 +88,8 @@ public class ListAssessments {
     public List<Assessment> getAssessments() {
         return mAssessments;
     }
+
+    public double calcGradeNeeded(double currentGrade, double desiredGrade, double finalGradeWeight) {
+        return ((desiredGrade * 100) - (currentGrade * (100 - finalGradeWeight))) / finalGradeWeight;
+    }
 }

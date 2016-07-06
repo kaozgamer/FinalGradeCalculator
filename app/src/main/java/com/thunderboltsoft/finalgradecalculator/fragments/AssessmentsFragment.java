@@ -25,6 +25,12 @@ public class AssessmentsFragment extends Fragment {
 
     private ActivityCallback mCallbackActivity;
 
+    private ListAdapter listAdapter;
+
+    private ListView mainList;
+
+    private ViewGroup mContainer;
+
     /**
      * Required public constructor.
      */
@@ -35,6 +41,8 @@ public class AssessmentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_assessments, container, false);
+
+        mContainer = container;
 
         // Set floating action button which will allow user to add a new assessment
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -47,10 +55,10 @@ public class AssessmentsFragment extends Fragment {
             }
         });
 
-        final ListAdapter listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, mCallbackActivity.getAssessments());
+        listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, mCallbackActivity.getAssessments());
 
         // Add onClick listener to the list, so that user can edit individual assessments
-        final ListView mainList = (ListView) view.findViewById(R.id.assessmentListView);
+        mainList = (ListView) view.findViewById(R.id.assessmentListView);
         mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,5 +83,12 @@ public class AssessmentsFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mCallbackActivity = (ActivityCallback) activity;
+    }
+
+    public void resetListView() {
+        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_assessments, mContainer, false);
+
+        listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, mCallbackActivity.getAssessments());
+        mainList.setAdapter(listAdapter);
     }
 }

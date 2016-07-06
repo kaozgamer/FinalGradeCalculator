@@ -86,10 +86,14 @@ public class MainFragment extends Fragment {
                     mCallbackActivity.switchToAssessmentsTab();
 
                     mCallbackActivity.enableViewPager();
+
+                    txtFinalGradeWeight.setText("");
                 } else {
                     finalGradeWeightLinearLayout.setVisibility(View.VISIBLE);
 
                     mCallbackActivity.disableViewPager();
+
+                    txtFinalGradeWeight.setText("");
                 }
             }
         });
@@ -111,7 +115,7 @@ public class MainFragment extends Fragment {
                     if (txtFinalGradeWeight.getText().toString().isEmpty()) {
                         gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()));
                     } else {
-                        gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()), Double.parseDouble(txtFinalGradeWeight.getText().toString()));
+                        gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTextView.getText().toString()), Double.parseDouble(mEditTextDesiredGrade.getText().toString()), Double.parseDouble(txtFinalGradeWeight.getText().toString()));
                     }
 
                     String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
