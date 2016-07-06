@@ -23,4 +23,6 @@ public interface ActivityCallback {
     double getCurrentGrade();
 
     List<Assessment> getAssessments();
+
+    void shouldDisableFab(boolean shouldDisable);
 }

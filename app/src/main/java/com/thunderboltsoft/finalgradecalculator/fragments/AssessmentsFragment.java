@@ -2,6 +2,7 @@ package com.thunderboltsoft.finalgradecalculator.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,8 @@ public class AssessmentsFragment extends Fragment {
 
     private ViewGroup mContainer;
 
+    private FloatingActionButton fab;
+
     /**
      * Required public constructor.
      */
@@ -45,7 +48,7 @@ public class AssessmentsFragment extends Fragment {
         mContainer = container;
 
         // Set floating action button which will allow user to add a new assessment
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +79,8 @@ public class AssessmentsFragment extends Fragment {
 
         mainList.setAdapter(listAdapter);
 
+        shouldDisable(true);
+
         return view;
     }
 
@@ -90,5 +95,19 @@ public class AssessmentsFragment extends Fragment {
 
         listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, mCallbackActivity.getAssessments());
         mainList.setAdapter(listAdapter);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        listAdapter.notifyDataSetChanged();
+    }
+
+    public void shouldDisable(boolean shouldDisable) {
+        if (shouldDisable) {
+            fab.setVisibility(View.INVISIBLE);
+        } else {
+            fab.setVisibility(View.VISIBLE);
+        }
     }
 }

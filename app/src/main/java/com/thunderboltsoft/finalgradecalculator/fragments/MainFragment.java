@@ -85,15 +85,19 @@ public class MainFragment extends Fragment {
                     // Switch to the assessments tab
                     mCallbackActivity.switchToAssessmentsTab();
 
-                    mCallbackActivity.enableViewPager();
+//                    mCallbackActivity.enableViewPager();
 
                     txtFinalGradeWeight.setText("");
+
+                    mCallbackActivity.shouldDisableFab(false);
                 } else {
                     finalGradeWeightLinearLayout.setVisibility(View.VISIBLE);
 
-                    mCallbackActivity.disableViewPager();
+//                    mCallbackActivity.disableViewPager();
 
                     txtFinalGradeWeight.setText("");
+
+                    mCallbackActivity.shouldDisableFab(true);
                 }
             }
         });

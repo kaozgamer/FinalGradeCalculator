@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.thunderboltsoft.finalgradecalculator.fragments.AssessmentsFragment;
 import com.thunderboltsoft.finalgradecalculator.fragments.MainFragment;
+import com.thunderboltsoft.finalgradecalculator.fragments.SettingsFragment;
 
 /**
  * Provides the views for every page in every tab.
@@ -63,10 +64,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             MainFragment mainFragment = new MainFragment();
             mRegisteredFragments.put(position, mainFragment); // Save the fragment
             return mainFragment;
-        } else {
+        } else if (position == 1) {
             AssessmentsFragment assessmentsFragment = new AssessmentsFragment();
             mRegisteredFragments.put(position, assessmentsFragment); // Save the fragment
             return assessmentsFragment;
+        } else {
+            SettingsFragment settingsFragment = new SettingsFragment();
+            mRegisteredFragments.put(position, settingsFragment);
+            return settingsFragment;
         }
     }
 

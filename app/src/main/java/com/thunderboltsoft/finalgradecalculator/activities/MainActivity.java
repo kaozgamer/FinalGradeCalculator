@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.thunderboltsoft.finalgradecalculator.R;
 import com.thunderboltsoft.finalgradecalculator.adapters.ViewPagerAdapter;
+import com.thunderboltsoft.finalgradecalculator.fragments.AssessmentsFragment;
 import com.thunderboltsoft.finalgradecalculator.fragments.MainFragment;
 import com.thunderboltsoft.finalgradecalculator.interfaces.ActivityCallback;
 import com.thunderboltsoft.finalgradecalculator.libs.SlidingTabLayout;
@@ -50,12 +51,12 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     /**
      * The title for our tabs.
      */
-    private CharSequence mTitles[] = {"Calculator", "Assessments"};
+    private CharSequence mTitles[] = {"Calculator", "Assessments", "Settings"};
 
     /**
      * The number of tabs.
      */
-    private int mNumTabs = 2;
+    private int mNumTabs = 3;
 
     /**
      * Gets and returns the list of assessments entered by the user.
@@ -89,6 +90,12 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     @Override
     public double getCurrentGrade() {
         return mAssessments.getCurrentGrade();
+    }
+
+    @Override
+    public void shouldDisableFab(boolean shouldDisable) {
+        AssessmentsFragment assessmentsFragment = (AssessmentsFragment) mAdapter.getRegisteredFragment(1);
+        assessmentsFragment.shouldDisable(shouldDisable);
     }
 
     /**
@@ -145,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         mTabs.setViewPager(mPager);
 
         // Default is the switch compat is on
-        disableViewPager();
+//        disableViewPager();
     }
 
 
@@ -188,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         mPager.post(new Runnable() {
             @Override
             public void run() {
-                mPager.setCurrentItem(2);
+                mPager.setCurrentItem(1);
                 mAdapter.notifyDataSetChanged();
             }
         });
