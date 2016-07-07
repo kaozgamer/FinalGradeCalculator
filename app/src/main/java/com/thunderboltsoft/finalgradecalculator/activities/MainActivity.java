@@ -98,6 +98,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         assessmentsFragment.shouldDisable(shouldDisable);
     }
 
+    public void removeFromDataSet() {
+        mAssessments.recalculateCurrentGrade();
+
+        MainFragment mainFragment = (MainFragment) mAdapter.getRegisteredFragment(0);
+        mainFragment.updateCurrentGrade(mAssessments.getCurrentGrade());
+    }
+
     /**
      * Sends an assessment to the main activity.
      * <p/>
@@ -105,8 +112,29 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
      *
      * @param assessment the assessment
      */
-    public void sendAssessment(Assessment assessment) {
+    public void sendAssessment(final Assessment assessment) {
+//        List<Assessment> newAssessments = new ArrayList<>();
+//        newAssessments.addAll(mAssessments.getAssessments());
+//        newAssessments.add(assessment);
+//
+//        mAssessments.getAssessments().clear();
+//        mAssessments.getAssessments().addAll(newAssessments);
+//
+//        mAdapter.notifyDataSetChanged();
+
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                mAssessments.addAssessment(assessment);
+//                mAdapter.notifyDataSetChanged();
+//            }
+//        });
+
         mAssessments.addAssessment(assessment);
+
+        AssessmentsFragment assessmentsFragment = (AssessmentsFragment) mAdapter.getRegisteredFragment(1);
+        assessmentsFragment.updateListAdapter();
+
         MainFragment mainFragment = (MainFragment) mAdapter.getRegisteredFragment(0);
         mainFragment.updateCurrentGrade(mAssessments.getCurrentGrade());
     }

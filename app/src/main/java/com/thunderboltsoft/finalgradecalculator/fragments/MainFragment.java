@@ -38,7 +38,7 @@ public class MainFragment extends Fragment {
     /**
      * Stores the user's current grade. Supplied by the user or calculated by the list.
      */
-    private EditText mTextView;
+    private EditText mTxtCurrentGrade;
 
     /**
      * Displays the grade the user needs to achieve in order to achieve their desired grade.
@@ -65,10 +65,10 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
-        mTextView = (EditText) view.findViewById(R.id.textView);
+        mTxtCurrentGrade = (EditText) view.findViewById(R.id.textView);
 
         String currentGrade = String.format(Locale.getDefault(), "%.2f", mCallbackActivity.getCurrentGrade());
-        mTextView.setText(currentGrade); // Set user's current grade to 2 decimal places
+        mTxtCurrentGrade.setText(currentGrade); // Set user's current grade to 2 decimal places
 
         final TextInputLayout finalGradeWeightLinearLayout = (TextInputLayout) view.findViewById(R.id.input_layout_final_weight);
         final EditText txtFinalGradeWeight = (EditText) view.findViewById(R.id.editTextFinalGradeWeight);
@@ -85,19 +85,14 @@ public class MainFragment extends Fragment {
                     // Switch to the assessments tab
                     mCallbackActivity.switchToAssessmentsTab();
 
-//                    mCallbackActivity.enableViewPager();
-
                     txtFinalGradeWeight.setText("");
-
                     mCallbackActivity.shouldDisableFab(false);
+                    mTxtCurrentGrade.setEnabled(false);
                 } else {
                     finalGradeWeightLinearLayout.setVisibility(View.VISIBLE);
-
-//                    mCallbackActivity.disableViewPager();
-
                     txtFinalGradeWeight.setText("");
-
                     mCallbackActivity.shouldDisableFab(true);
+                    mTxtCurrentGrade.setEnabled(true);
                 }
             }
         });
@@ -119,7 +114,7 @@ public class MainFragment extends Fragment {
                     if (txtFinalGradeWeight.getText().toString().isEmpty()) {
                         gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()));
                     } else {
-                        gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTextView.getText().toString()), Double.parseDouble(mEditTextDesiredGrade.getText().toString()), Double.parseDouble(txtFinalGradeWeight.getText().toString()));
+                        gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTxtCurrentGrade.getText().toString()), Double.parseDouble(mEditTextDesiredGrade.getText().toString()), Double.parseDouble(txtFinalGradeWeight.getText().toString()));
                     }
 
                     String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
@@ -153,7 +148,7 @@ public class MainFragment extends Fragment {
      * @param currentGrade current weighted grade
      */
     public void updateCurrentGrade(double currentGrade) {
-        mTextView.setText(String.format(Locale.getDefault(), "%.2f", currentGrade)); // 2 decimal places
+        mTxtCurrentGrade.setText(String.format(Locale.getDefault(), "%.2f", currentGrade)); // 2 decimal places
     }
 
     @Override

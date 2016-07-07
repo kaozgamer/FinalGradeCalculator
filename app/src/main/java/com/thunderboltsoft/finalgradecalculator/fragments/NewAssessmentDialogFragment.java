@@ -52,15 +52,15 @@ public class NewAssessmentDialogFragment extends DialogFragment {
     /**
      * Create a new NewAssessmentDialogFragment fragment.
      *
-     * @param myIndex params
+     * @param editMode params
      * @return new fragment
      */
-    public static NewAssessmentDialogFragment newInstance(int myIndex) {
+    public static NewAssessmentDialogFragment newInstance(boolean editMode) {
         NewAssessmentDialogFragment newAssessmentDialogFragment = new NewAssessmentDialogFragment();
 
         // Just to test Bundles
         Bundle args = new Bundle();
-        args.putInt("anIntToSend", myIndex);
+        args.putBoolean("isEditMode", editMode);
         newAssessmentDialogFragment.setArguments(args);
 
         return newAssessmentDialogFragment;
@@ -97,10 +97,38 @@ public class NewAssessmentDialogFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Boolean canEdit = getArguments().getBoolean("isEditMode");
+
+                                if (canEdit) {
+
+                                    // Send the assessment to the activity to be added to the list of assessments
+                                    MainActivity activity = (MainActivity) getActivity();
+
+                                    activity.sendAssessment(mAssessment);
+
+                                    // Hide the soft keyboard - annoying
+                                    InputMethodManager imm = (InputMethodManager) activity.getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                                }
+
                                 dialog.dismiss(); // Do not do anything with the user entered values
                             }
                         }
                 );
+
+        Boolean canEdit = getArguments().getBoolean("isEditMode");
+
+        if (canEdit) {
+            b.setNeutralButton("Delete",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MainActivity activity = (MainActivity) getActivity();
+                            activity.removeFromDataSet();
+                            dialog.dismiss();
+                        }
+                    });
+        }
 
         b.setView(view);
 

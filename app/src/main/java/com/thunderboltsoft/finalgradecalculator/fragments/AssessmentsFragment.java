@@ -53,7 +53,7 @@ public class AssessmentsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Show the new assessment fragment in a dialog box
-                NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(0);
+                NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(false);
                 newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
             }
         });
@@ -67,7 +67,7 @@ public class AssessmentsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Assessment p = (Assessment) mainList.getItemAtPosition(position);
 
-                NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(0);
+                NewAssessmentDialogFragment newAssessmentDialogFragment = NewAssessmentDialogFragment.newInstance(true);
                 newAssessmentDialogFragment.setFromListView(p);
 
                 newAssessmentDialogFragment.show(getChildFragmentManager().beginTransaction(), "DialogFragment");
@@ -109,5 +109,9 @@ public class AssessmentsFragment extends Fragment {
         } else {
             fab.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void updateListAdapter() {
+        listAdapter.notifyDataSetChanged();
     }
 }
