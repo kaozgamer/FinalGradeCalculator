@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     /**
      * The number of tabs.
      */
-    private int mNumTabs = 3;
+    private int mNumTabs = 2;
 
     /**
      * Gets and returns the list of assessments entered by the user.
@@ -193,6 +193,18 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            // TODO: Implement the settings fragment and inflate it from here
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
