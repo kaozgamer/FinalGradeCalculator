@@ -9,4 +9,22 @@
             android:summary="click this little box" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="About">
+
+        <Preference
+            android:key="pref_contact_dev"
+            android:title="Contact Developer"
+            android:summary="For feature requests, bugs"></Preference>
+
+        <Preference
+            android:key="pref_about"
+            android:title="Source Code"
+            android:summary="View source code on Github">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/kaozgamer/GradeCalculator" />
+        </Preference>
+
+    </PreferenceCategory>
 </PreferenceScreen>
