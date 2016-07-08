@@ -1,5 +1,6 @@
 package com.thunderboltsoft.finalgradecalculator.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -200,7 +201,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            // TODO: Implement the settings fragment and inflate it from here
+            Intent intent = new Intent();
+            intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.SettingActivity");
+            startActivity(intent);
 
             return true;
         }
