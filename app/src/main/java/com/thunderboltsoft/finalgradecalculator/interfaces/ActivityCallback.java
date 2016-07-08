@@ -25,4 +25,6 @@ public interface ActivityCallback {
     List<Assessment> getAssessments();
 
     void shouldDisableFab(boolean shouldDisable);
+
+    void cleanAssessments();
 }

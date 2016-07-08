@@ -141,6 +141,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     }
 
     @Override
+    public void cleanAssessments() {
+        mAssessments.clean();
+
+        AssessmentsFragment assessmentsFragment = (AssessmentsFragment) mAdapter.getRegisteredFragment(1);
+        assessmentsFragment.updateListAdapter();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -181,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         mTabs.setViewPager(mPager);
 
         // Default is the switch compat is on
-//        disableViewPager();
+        disableViewPager();
     }
 
 

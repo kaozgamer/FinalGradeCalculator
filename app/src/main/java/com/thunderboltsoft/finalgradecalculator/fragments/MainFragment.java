@@ -55,6 +55,8 @@ public class MainFragment extends Fragment {
      */
     private ActivityCallback mCallbackActivity;
 
+    private TextView mTextGradeNeeded;
+
     /**
      * Required default constructor
      */
@@ -65,15 +67,76 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        final TextInputLayout finalGradeWeightLinearLayout = (TextInputLayout) view.findViewById(R.id.input_layout_final_weight);
+        final EditText txtFinalGradeWeight = (EditText) view.findViewById(R.id.editTextFinalGradeWeight);
+        mTextGradeNeeded = (TextView) view.findViewById(R.id.textViewResult);
+        mDesiredExamGrade = (TextView) view.findViewById(R.id.textViewDesiredResult);
+        mSwitchCompat = (SwitchCompat) view.findViewById(R.id.switchCurrentGrade);
         mTxtCurrentGrade = (EditText) view.findViewById(R.id.textView);
+        mEditTextDesiredGrade = (EditText) view.findViewById(R.id.editTextDesiredGrade);
+
+        txtFinalGradeWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((!mEditTextDesiredGrade.getText().toString().isEmpty()) && (!mTxtCurrentGrade.getText().toString().isEmpty()) && (!txtFinalGradeWeight.getText().toString().isEmpty())) {
+                    if (mSwitchCompat.isChecked()) {
+                        double gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTxtCurrentGrade.getText().toString()),
+                                Double.parseDouble(mEditTextDesiredGrade.getText().toString()),
+                                Double.parseDouble(txtFinalGradeWeight.getText().toString()));
+
+                        String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
+                        mTextGradeNeeded.setText(neededGrade);
+
+                        neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
+                        mDesiredExamGrade.setText(neededGrade);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mTxtCurrentGrade.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if ((!mEditTextDesiredGrade.getText().toString().isEmpty()) && (!txtFinalGradeWeight.getText().toString().isEmpty()) && (!mTxtCurrentGrade.getText().toString().isEmpty())) {
+                    if (mSwitchCompat.isChecked()) {
+                        double gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTxtCurrentGrade.getText().toString()),
+                                Double.parseDouble(mEditTextDesiredGrade.getText().toString()),
+                                Double.parseDouble(txtFinalGradeWeight.getText().toString()));
+
+                        String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
+                        mTextGradeNeeded.setText(neededGrade);
+
+                        neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
+                        mDesiredExamGrade.setText(neededGrade);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         String currentGrade = String.format(Locale.getDefault(), "%.2f", mCallbackActivity.getCurrentGrade());
         mTxtCurrentGrade.setText(currentGrade); // Set user's current grade to 2 decimal places
 
-        final TextInputLayout finalGradeWeightLinearLayout = (TextInputLayout) view.findViewById(R.id.input_layout_final_weight);
-        final EditText txtFinalGradeWeight = (EditText) view.findViewById(R.id.editTextFinalGradeWeight);
-
-        mSwitchCompat = (SwitchCompat) view.findViewById(R.id.switchCurrentGrade);
         mSwitchCompat.setChecked(true); // Default is assuming user knows their grade
         mSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -86,21 +149,39 @@ public class MainFragment extends Fragment {
                     mCallbackActivity.switchToAssessmentsTab();
 
                     txtFinalGradeWeight.setText("");
+                    mTxtCurrentGrade.setText("");
+                    mEditTextDesiredGrade.setText("");
+
+                    mTextGradeNeeded.setText("");
+                    mDesiredExamGrade.setText(getResources().getString(R.string.desired_result_description));
+
+                    mCallbackActivity.cleanAssessments();
+
                     mCallbackActivity.shouldDisableFab(false);
                     mTxtCurrentGrade.setEnabled(false);
+
+                    mCallbackActivity.enableViewPager();
                 } else {
                     finalGradeWeightLinearLayout.setVisibility(View.VISIBLE);
+
                     txtFinalGradeWeight.setText("");
+                    mTxtCurrentGrade.setText("");
+                    mEditTextDesiredGrade.setText("");
+
+                    mTextGradeNeeded.setText("");
+                    mDesiredExamGrade.setText(getResources().getString(R.string.desired_result_description));
+
+                    mCallbackActivity.cleanAssessments();
+
                     mCallbackActivity.shouldDisableFab(true);
                     mTxtCurrentGrade.setEnabled(true);
+
+                    mCallbackActivity.disableViewPager();
                 }
             }
         });
 
-        final TextView txtGradeNeeded = (TextView) view.findViewById(R.id.textViewResult);
-
         // As user's enters desired grade, calculate final exam grade needed to achieve that
-        mEditTextDesiredGrade = (EditText) view.findViewById(R.id.editTextDesiredGrade);
         mEditTextDesiredGrade.addTextChangedListener(new TextWatcher() { // Text change listener so no need for a button
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -118,9 +199,8 @@ public class MainFragment extends Fragment {
                     }
 
                     String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
-                    txtGradeNeeded.setText(neededGrade);
+                    mTextGradeNeeded.setText(neededGrade);
 
-                    mDesiredExamGrade = (TextView) view.findViewById(R.id.textViewDesiredResult);
                     neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
                     mDesiredExamGrade.setText(neededGrade);
                 }
@@ -149,6 +229,16 @@ public class MainFragment extends Fragment {
      */
     public void updateCurrentGrade(double currentGrade) {
         mTxtCurrentGrade.setText(String.format(Locale.getDefault(), "%.2f", currentGrade)); // 2 decimal places
+
+        if (!mEditTextDesiredGrade.getText().toString().isEmpty()) {
+            double gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()));
+
+            String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
+            mTextGradeNeeded.setText(neededGrade);
+
+            neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
+            mDesiredExamGrade.setText(neededGrade);
+        }
     }
 
     @Override

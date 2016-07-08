@@ -96,4 +96,10 @@ public class ListAssessments {
     public void recalculateCurrentGrade() {
         calcCurrentGrade();
     }
+
+    public void clean() {
+        mExamWeight = 0.0;
+        mCurrentGrade = 0.0;
+        mAssessments.clear();
+    }
 }
