@@ -7,17 +7,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.thunderboltsoft.finalgradecalculator.R;
-import com.thunderboltsoft.finalgradecalculator.fragments.SettingFragment;
 
 /**
- * Created by Thushan on 08-Jul-16.
+ * Created by Thushan on 09-Jul-16.
  */
-public class SettingActivity extends AppCompatActivity {
+public class HelpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_toolbar);
+        setContentView(R.layout.fragment_help);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -32,9 +31,6 @@ public class SettingActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingFragment()).commit();
-
     }
 
     @Override

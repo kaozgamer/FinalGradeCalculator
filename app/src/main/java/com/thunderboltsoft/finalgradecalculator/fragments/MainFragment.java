@@ -55,6 +55,9 @@ public class MainFragment extends Fragment {
      */
     private ActivityCallback mCallbackActivity;
 
+    /**
+     * Shows the grade needed.
+     */
     private TextView mTextGradeNeeded;
 
     /**
@@ -79,7 +82,6 @@ public class MainFragment extends Fragment {
         txtFinalGradeWeight.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -101,14 +103,12 @@ public class MainFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
 
         mTxtCurrentGrade.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -130,7 +130,6 @@ public class MainFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
 

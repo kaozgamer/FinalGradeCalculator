@@ -214,6 +214,12 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
             startActivity(intent);
 
             return true;
+        } else if (id == R.id.action_help) {
+            Intent intent = new Intent();
+            intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.HelpActivity");
+            startActivity(intent);
+
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
