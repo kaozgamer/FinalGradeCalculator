@@ -9,12 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TableRow;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.thunderboltsoft.finalgradecalculator.R;
 import com.thunderboltsoft.finalgradecalculator.adapters.ListAdapter;
 import com.thunderboltsoft.finalgradecalculator.interfaces.ActivityCallback;
 import com.thunderboltsoft.finalgradecalculator.models.Assessment;
+
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 /**
  * Fragment that contains the list of assessments that the user have entered.
@@ -23,6 +27,8 @@ import com.thunderboltsoft.finalgradecalculator.models.Assessment;
  * @author Thushan Perera
  */
 public class AssessmentsFragment extends Fragment {
+
+    final private String SHOWCASE_ID = "Test2";
 
     private ActivityCallback mCallbackActivity;
 
@@ -34,6 +40,8 @@ public class AssessmentsFragment extends Fragment {
 
     private FloatingActionButton fab;
 
+    private TableRow mHeading;
+
     /**
      * Required public constructor.
      */
@@ -44,6 +52,8 @@ public class AssessmentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_assessments, container, false);
+
+        mHeading = (TableRow) view.findViewById(R.id.tableRow);
 
         mContainer = container;
 
@@ -81,6 +91,7 @@ public class AssessmentsFragment extends Fragment {
 
         shouldDisable(true);
 
+
         return view;
     }
 
@@ -101,6 +112,32 @@ public class AssessmentsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            onResume();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (!getUserVisibleHint()) {
+            return;
+        }
+
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setDelay(500); // half second between each showcase view
+
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_ID);
+        sequence.setConfig(config);
+        sequence.addSequenceItem(fab, "Tap here to enter the grade and weight for an assessment", "GOT IT");
+        sequence.addSequenceItem(mHeading, "You can edit or delete any of these by tapping on them", "GOT IT");
+        sequence.start();
     }
 
     public void shouldDisable(boolean shouldDisable) {

@@ -25,6 +25,8 @@ import com.thunderboltsoft.finalgradecalculator.models.Assessment;
  */
 public class NewAssessmentDialogFragment extends DialogFragment {
 
+    final private String SHOWCASE_ID = "Test3";
+
     /**
      * The EditText box for user to enter the weighting of assessment.
      */
@@ -131,6 +133,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
         }
 
         b.setView(view);
+
 
         return b.create();
     }
