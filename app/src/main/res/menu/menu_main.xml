@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/action_help"
-        android:title="Help"
+        android:title="Help &amp; Feedback"
         android:orderInCategory="101"
         app:showAsAction="never" />
 

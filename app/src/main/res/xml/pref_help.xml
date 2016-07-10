@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Credits">
+    <PreferenceCategory android:title="App">
+        <Preference
+            android:summary="App that allows students to calculate their current grade in a unit, and how much they need in the final assessment in order to achieve their desired grade."
+            android:title="Description" />
 
         <Preference
-            android:key="pref_contact_dev"
-            android:title="Contact Developer"
-            android:summary="For feature requests, bugs"></Preference>
-
-        <Preference
-            android:key="pref_about"
-            android:title="Source Code"
-            android:summary="View source code on Github">
+            android:summary="Go to Google Play Store"
+            android:title="Rate This App">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/kaozgamer/GradeCalculator" />
         </Preference>
+
+        <Preference
+            android:summary="View source code on Github"
+            android:title="Source Code">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/kaozgamer/GradeCalculator" />
+        </Preference>
+
+        <Preference
+            android:summary="1.0.0"
+            android:title="Version" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="External Libraries Used">
+
+        <Preference
+            android:summary="View source code on Github"
+            android:title="FloatingActionButton">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/makovkastar/FloatingActionButton" />
+        </Preference>
+
+        <Preference
+            android:summary="View source code on Github"
+            android:title="MaterialShowcaseView">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/deano2390/MaterialShowcaseView" />
+        </Preference>
+
     </PreferenceCategory>
 </PreferenceScreen>
