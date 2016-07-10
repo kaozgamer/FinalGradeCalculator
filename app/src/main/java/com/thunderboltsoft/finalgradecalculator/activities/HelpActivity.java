@@ -66,6 +66,12 @@ public class HelpActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(mailto, "Select email application"));
 
             return true;
+        } else if (item.getItemId() == R.id.action_help_about) {
+            Intent intent = new Intent();
+            intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.AboutActivity");
+            startActivity(intent);
+
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
