@@ -30,6 +30,9 @@ import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
  */
 public class MainFragment extends Fragment {
 
+    /**
+     * Unique ID for the MaterialShowcaseView.
+     */
     final private String SHOWCASE_ID = "TEST";
 
     /**
@@ -92,15 +95,7 @@ public class MainFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if ((!mEditTextDesiredGrade.getText().toString().isEmpty()) && (!mTxtCurrentGrade.getText().toString().isEmpty()) && (!mTxtFinalGradeWeight.getText().toString().isEmpty())) {
                     if (mSwitchCompat.isChecked()) {
-                        double gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTxtCurrentGrade.getText().toString()),
-                                Double.parseDouble(mEditTextDesiredGrade.getText().toString()),
-                                Double.parseDouble(mTxtFinalGradeWeight.getText().toString()));
-
-                        String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
-                        mTextGradeNeeded.setText(neededGrade);
-
-                        neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
-                        mDesiredExamGrade.setText(neededGrade);
+                        calculateAndShowGradeNeeded();
                     }
                 }
             }
@@ -119,15 +114,7 @@ public class MainFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if ((!mEditTextDesiredGrade.getText().toString().isEmpty()) && (!mTxtFinalGradeWeight.getText().toString().isEmpty()) && (!mTxtCurrentGrade.getText().toString().isEmpty())) {
                     if (mSwitchCompat.isChecked()) {
-                        double gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTxtCurrentGrade.getText().toString()),
-                                Double.parseDouble(mEditTextDesiredGrade.getText().toString()),
-                                Double.parseDouble(mTxtFinalGradeWeight.getText().toString()));
-
-                        String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
-                        mTextGradeNeeded.setText(neededGrade);
-
-                        neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
-                        mDesiredExamGrade.setText(neededGrade);
+                        calculateAndShowGradeNeeded();
                     }
                 }
             }
@@ -151,14 +138,7 @@ public class MainFragment extends Fragment {
                     // Switch to the assessments tab
                     mCallbackActivity.switchToAssessmentsTab();
 
-                    mTxtFinalGradeWeight.setText("");
-                    mTxtCurrentGrade.setText("");
-                    mEditTextDesiredGrade.setText("");
-
-                    mTextGradeNeeded.setText("");
-                    mDesiredExamGrade.setText(getResources().getString(R.string.desired_result_description));
-
-                    mCallbackActivity.cleanAssessments();
+                    cleanMainFragment();
 
                     mCallbackActivity.shouldDisableFab(false);
                     mTxtCurrentGrade.setEnabled(false);
@@ -167,14 +147,7 @@ public class MainFragment extends Fragment {
                 } else {
                     finalGradeWeightLinearLayout.setVisibility(View.VISIBLE);
 
-                    mTxtFinalGradeWeight.setText("");
-                    mTxtCurrentGrade.setText("");
-                    mEditTextDesiredGrade.setText("");
-
-                    mTextGradeNeeded.setText("");
-                    mDesiredExamGrade.setText(getResources().getString(R.string.desired_result_description));
-
-                    mCallbackActivity.cleanAssessments();
+                    cleanMainFragment();
 
                     mCallbackActivity.shouldDisableFab(true);
                     mTxtCurrentGrade.setEnabled(true);
@@ -215,6 +188,29 @@ public class MainFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void calculateAndShowGradeNeeded() {
+        double gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTxtCurrentGrade.getText().toString()),
+                Double.parseDouble(mEditTextDesiredGrade.getText().toString()),
+                Double.parseDouble(mTxtFinalGradeWeight.getText().toString()));
+
+        String neededGrade = String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "%";
+        mTextGradeNeeded.setText(neededGrade);
+
+        neededGrade = "You need at least " + String.format(Locale.getDefault(), "%.2f", gradeNeeded) + "% to achieve a course grade of " + String.format(Locale.getDefault(), "%.2f", Double.parseDouble(mEditTextDesiredGrade.getText().toString())) + "%";
+        mDesiredExamGrade.setText(neededGrade);
+    }
+
+    private void cleanMainFragment() {
+        mTxtFinalGradeWeight.setText("");
+        mTxtCurrentGrade.setText("");
+        mEditTextDesiredGrade.setText("");
+
+        mTextGradeNeeded.setText("");
+        mDesiredExamGrade.setText(getResources().getString(R.string.desired_result_description));
+
+        mCallbackActivity.cleanAssessments();
     }
 
     /**
