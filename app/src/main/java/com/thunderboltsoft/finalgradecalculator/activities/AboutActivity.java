@@ -10,7 +10,9 @@ import com.thunderboltsoft.finalgradecalculator.R;
 import com.thunderboltsoft.finalgradecalculator.fragments.AboutFragment;
 
 /**
- * Created by Thushan on 09-Jul-16.
+ * About Activity for the About Activity fragment.
+ *
+ * @author Thushan Perera
  */
 public class AboutActivity extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_toolbar);
 
-
+        // We want the toolbar so that the user can go back to the MainActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,15 +36,15 @@ public class AboutActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        // Set the new view
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new AboutFragment()).commit();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) { // If user clicks on back button, go to the previous activity
             finish();
-
             return true;
         }
 

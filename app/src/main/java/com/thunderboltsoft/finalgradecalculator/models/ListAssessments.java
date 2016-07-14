@@ -89,14 +89,29 @@ public class ListAssessments {
         return mAssessments;
     }
 
+    /**
+     * Calculates the grade needed to achieve desired grade from the weight of final assessment and the current grade.
+     *
+     * @param currentGrade     the current grade as a percentage
+     * @param desiredGrade     the desired grade as a percentage
+     * @param finalGradeWeight the weighting of the final assessment
+     * @return the grade needed as a percentage
+     */
     public double calcGradeNeeded(double currentGrade, double desiredGrade, double finalGradeWeight) {
         return ((desiredGrade * 100) - (currentGrade * (100 - finalGradeWeight))) / finalGradeWeight;
     }
 
+    /**
+     * Force recalculates the current grade from the current assessments stored in the list.
+     */
     public void recalculateCurrentGrade() {
         calcCurrentGrade();
     }
 
+    /**
+     * Resets everything.
+     * This is done instead of creating new ListAssessments in order to avoid disrupting the ListAdapter for ListView in the AssessmentsFragment.
+     */
     public void clean() {
         mExamWeight = 0.0;
         mCurrentGrade = 0.0;

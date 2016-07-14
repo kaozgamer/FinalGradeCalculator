@@ -15,9 +15,8 @@ import java.util.List;
 /**
  * This code is based on Rakhita's answer on StackOverflow.
  *
- * @see <a href="http://stackoverflow.com/a/8166802/2440953">Custom Adapter for List View</a>
- *
  * @author Thushan Perera
+ * @see <a href="http://stackoverflow.com/a/8166802/2440953">Custom Adapter for List View</a>
  */
 public class ListAdapter extends ArrayAdapter<Assessment> {
 
@@ -33,9 +32,10 @@ public class ListAdapter extends ArrayAdapter<Assessment> {
 
     /**
      * Public constructor.
-     * @param context the context
+     *
+     * @param context  the context
      * @param resource the resource id
-     * @param items the list of assessments to populate to view with
+     * @param items    the list of assessments to populate to view with
      */
     public ListAdapter(Context context, int resource, List<Assessment> items) {
         super(context, resource, items);
@@ -43,9 +43,10 @@ public class ListAdapter extends ArrayAdapter<Assessment> {
 
     /**
      * Gets the view at a given position.
-     * @param position position of view
+     *
+     * @param position    position of view
      * @param convertView the reference view
-     * @param parent the parent group of the view
+     * @param parent      the parent group of the view
      * @return the view
      */
     @Override

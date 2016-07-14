@@ -11,6 +11,8 @@ import com.thunderboltsoft.finalgradecalculator.R;
  * Fragment that lets the user edit the settings of the app.
  * <p/>
  * NOT TO BE SENT TO PRODUCTION VERSION AT THIS STAGE.
+ *
+ * @author Thushan Perera
  */
 public class SettingFragment extends PreferenceFragment {
     @Override

@@ -3,7 +3,6 @@ package com.thunderboltsoft.finalgradecalculator.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -60,45 +59,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     private int mNumTabs = 2;
 
     /**
-     * Gets and returns the list of assessments entered by the user.
-     *
-     * @return list of assessments
+     * Remove an assessment from the list of assessments.
      */
-    @Override
-    public List<Assessment> getAssessments() {
-        return mAssessments.getAssessments();
-    }
-
-    /**
-     * Get and return the final grade needed to achieve the desired grade.
-     * @param desiredGrade the desired grade as percentage
-     * @return the grade needed as a percentage
-     */
-    @Override
-    public double getGradeNeeded(double desiredGrade) {
-        return mAssessments.calcGradeNeeded(desiredGrade);
-    }
-
-    @Override
-    public double getGradeNeeded(double currentGrade, double desiredGrade, double finalGradeWeight) {
-        return mAssessments.calcGradeNeeded(currentGrade, desiredGrade, finalGradeWeight);
-    }
-
-    /**
-     * Get and return the current grades for all the assessments entered by user.
-     * @return the current weighted grade
-     */
-    @Override
-    public double getCurrentGrade() {
-        return mAssessments.getCurrentGrade();
-    }
-
-    @Override
-    public void shouldDisableFab(boolean shouldDisable) {
-        AssessmentsFragment assessmentsFragment = (AssessmentsFragment) mAdapter.getRegisteredFragment(1);
-        assessmentsFragment.shouldDisable(shouldDisable);
-    }
-
     public void removeFromDataSet() {
         mAssessments.recalculateCurrentGrade();
 
@@ -108,8 +70,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
 
     /**
      * Sends an assessment to the main activity.
-     * <p/>
-     * TODO: Refactor and send this as a callback
      *
      * @param assessment the assessment
      */
@@ -124,20 +84,11 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     }
 
     @Override
-    public void cleanAssessments() {
-        mAssessments.clean();
-
-        AssessmentsFragment assessmentsFragment = (AssessmentsFragment) mAdapter.getRegisteredFragment(1);
-        assessmentsFragment.updateListAdapter();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar myToolBar = (Toolbar) findViewById(R.id.toolbar);
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         setSupportActionBar(myToolBar);
 
@@ -190,14 +141,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings) { // Did the user click on settings?
             Intent intent = new Intent();
             intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.SettingActivity");
             startActivity(intent);
 
             return true;
-        } else if (id == R.id.action_help) {
+        } else if (id == R.id.action_help) { // Did the user click on help?
             Intent intent = new Intent();
             intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.HelpActivity");
             startActivity(intent);
@@ -217,12 +167,18 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         }
     }
 
+    /**
+     * Disable the ViewPager and SlidingTabStrip.
+     */
     @Override
     public void disableViewPager() {
         mPager.beginFakeDrag();
         mTabs.setEnableTabsClick(false);
     }
 
+    /**
+     * Enable the ViewPager and SlidingTabStrip.
+     */
     @Override
     public void enableViewPager() {
         mPager.beginFakeDrag();
@@ -230,6 +186,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         mTabs.setEnableTabsClick(true);
     }
 
+    /**
+     * Switch ViewPager to the Assessments tab.
+     */
     @Override
     public void switchToAssessmentsTab() {
         mPager.post(new Runnable() {
@@ -239,5 +198,71 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
                 mAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    /**
+     * Get and return the final grade needed to achieve the desired grade.
+     *
+     * @param desiredGrade the desired grade as percentage
+     * @return the grade needed as a percentage
+     */
+    @Override
+    public double getGradeNeeded(double desiredGrade) {
+        return mAssessments.calcGradeNeeded(desiredGrade);
+    }
+
+    /**
+     * Override of getGradeNeeded method.
+     *
+     * @param currentGrade     current grade they are getting as a percentage
+     * @param desiredGrade     the desired grade as a percentage
+     * @param finalGradeWeight the weighting of the final assessment
+     * @return the grade needed as a percentage
+     */
+    @Override
+    public double getGradeNeeded(double currentGrade, double desiredGrade, double finalGradeWeight) {
+        return mAssessments.calcGradeNeeded(currentGrade, desiredGrade, finalGradeWeight);
+    }
+
+    /**
+     * Get and return the current grades for all the assessments entered by user.
+     *
+     * @return the current weighted grade
+     */
+    @Override
+    public double getCurrentGrade() {
+        return mAssessments.getCurrentGrade();
+    }
+
+    /**
+     * Gets and returns the list of assessments entered by the user.
+     *
+     * @return list of assessments
+     */
+    @Override
+    public List<Assessment> getAssessments() {
+        return mAssessments.getAssessments();
+    }
+
+    /**
+     * Should the FloatingActionButton in the Assessments List fragment be disabled or not?
+     *
+     * @param shouldDisable true = if should disable, else false
+     */
+    @Override
+    public void shouldDisableFab(boolean shouldDisable) {
+        AssessmentsFragment assessmentsFragment = (AssessmentsFragment) mAdapter.getRegisteredFragment(1);
+        assessmentsFragment.shouldDisable(shouldDisable);
+    }
+
+    /**
+     * Clean the list of assessments, therefore clears the ListAdapter then the list view after notifyDataSetChanged().
+     */
+    @Override
+    public void cleanAssessments() {
+        mAssessments.clean();
+
+        AssessmentsFragment assessmentsFragment = (AssessmentsFragment) mAdapter.getRegisteredFragment(1);
+        assessmentsFragment.updateListAdapter();
     }
 }

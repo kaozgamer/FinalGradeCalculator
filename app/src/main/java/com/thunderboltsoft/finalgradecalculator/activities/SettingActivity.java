@@ -10,7 +10,9 @@ import com.thunderboltsoft.finalgradecalculator.R;
 import com.thunderboltsoft.finalgradecalculator.fragments.SettingFragment;
 
 /**
- * Created by Thushan on 08-Jul-16.
+ * Activity for the SettingsFragment class.
+ *
+ * @author Thushan Perera
  */
 public class SettingActivity extends AppCompatActivity {
 
@@ -19,6 +21,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_toolbar);
 
+        // User needs toolbar to go back to the main activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +42,7 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) { // Did user click on the back button?
             finish();
         }
 

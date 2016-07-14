@@ -11,7 +11,9 @@ import android.view.View;
 import com.thunderboltsoft.finalgradecalculator.R;
 
 /**
- * Created by Thushan on 09-Jul-16.
+ * Activity for the HelpFragment class.
+ *
+ * @author Thushan Perera
  */
 public class HelpActivity extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_help);
 
+        // User needs toolbar to go back to the main activity screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,11 +47,12 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) { // Did user click on the back button?
             finish();
 
             return true;
-        } else if (item.getItemId() == R.id.action_help_report_problem) {
+
+        } else if (item.getItemId() == R.id.action_help_report_problem) { // DId user click on the report bug button on the toolbar?
             Intent mailto = new Intent(Intent.ACTION_SEND);
             mailto.setType("message/rfc822");
             mailto.putExtra(Intent.EXTRA_EMAIL, new String[]{"kaozgamerdev+grade_calculator@gmail.com"});
@@ -57,7 +61,8 @@ public class HelpActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(mailto, "Select email application"));
 
             return true;
-        } else if (item.getItemId() == R.id.action_help_give_feedback) {
+
+        } else if (item.getItemId() == R.id.action_help_give_feedback) { // Did user click on the give feedback button on the toolbar?
             Intent mailto = new Intent(Intent.ACTION_SEND);
             mailto.setType("message/rfc822");
             mailto.putExtra(Intent.EXTRA_EMAIL, new String[]{"kaozgamerdev+grade_calculator@gmail.com"});
@@ -66,7 +71,8 @@ public class HelpActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(mailto, "Select email application"));
 
             return true;
-        } else if (item.getItemId() == R.id.action_help_about) {
+
+        } else if (item.getItemId() == R.id.action_help_about) { // Did user click on the about button on the toolbar?
             Intent intent = new Intent();
             intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.AboutActivity");
             startActivity(intent);
