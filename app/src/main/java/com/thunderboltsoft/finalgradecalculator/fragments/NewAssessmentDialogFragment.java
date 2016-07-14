@@ -25,6 +25,9 @@ import com.thunderboltsoft.finalgradecalculator.models.Assessment;
  */
 public class NewAssessmentDialogFragment extends DialogFragment {
 
+    /**
+     * Unique ID for the MaterialShowcaseView.
+     */
     final private String SHOWCASE_ID = "Test3";
 
     /**
@@ -120,7 +123,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
 
         Boolean canEdit = getArguments().getBoolean("isEditMode");
 
-        if (canEdit) {
+        if (canEdit) { // Check if opening up after the user clicks on an assessment in the assessments fragment
             b.setNeutralButton("Delete",
                     new DialogInterface.OnClickListener() {
                         @Override
@@ -145,6 +148,8 @@ public class NewAssessmentDialogFragment extends DialogFragment {
         AlertDialog d = (AlertDialog) getDialog();
         if (d != null) {
             Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+
+            // First validate the fields, show any error messages, then bundle into Assessment object and send to the main activity
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -197,7 +202,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
                     if (shouldDismiss) {
-                        dismiss();
+                        dismiss(); // Close the dialog
                     }
                 }
             });

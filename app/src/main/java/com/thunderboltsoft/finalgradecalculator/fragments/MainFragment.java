@@ -65,6 +65,9 @@ public class MainFragment extends Fragment {
      */
     private TextView mTextGradeNeeded;
 
+    /**
+     * EditText that user use to enter the weighting of the final exam.
+     */
     private EditText mTxtFinalGradeWeight;
 
     /**
@@ -78,6 +81,7 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        // Find and assign the views to global variables
         final TextInputLayout finalGradeWeightLinearLayout = (TextInputLayout) view.findViewById(R.id.input_layout_final_weight);
         mTxtFinalGradeWeight = (EditText) view.findViewById(R.id.editTextFinalGradeWeight);
         mTextGradeNeeded = (TextView) view.findViewById(R.id.textViewResult);
@@ -95,7 +99,7 @@ public class MainFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if ((!mEditTextDesiredGrade.getText().toString().isEmpty()) && (!mTxtCurrentGrade.getText().toString().isEmpty()) && (!mTxtFinalGradeWeight.getText().toString().isEmpty())) {
                     if (mSwitchCompat.isChecked()) {
-                        calculateAndShowGradeNeeded();
+                        calculateAndShowGradeNeeded(); // Make the app more responsive
                     }
                 }
             }
@@ -168,6 +172,7 @@ public class MainFragment extends Fragment {
                 if (!mEditTextDesiredGrade.getText().toString().equals("")) {
                     double gradeNeeded;
 
+                    // Decide which to calculate
                     if (mTxtFinalGradeWeight.getText().toString().isEmpty()) {
                         gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mEditTextDesiredGrade.getText().toString()));
                     } else {
@@ -190,6 +195,9 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Takes the values of the EditText views, calculates and shows the grade needed.
+     */
     private void calculateAndShowGradeNeeded() {
         double gradeNeeded = mCallbackActivity.getGradeNeeded(Double.parseDouble(mTxtCurrentGrade.getText().toString()),
                 Double.parseDouble(mEditTextDesiredGrade.getText().toString()),
@@ -202,6 +210,9 @@ public class MainFragment extends Fragment {
         mDesiredExamGrade.setText(neededGrade);
     }
 
+    /**
+     * Cleans all the values on the main fragment view.
+     */
     private void cleanMainFragment() {
         mTxtFinalGradeWeight.setText("");
         mTxtCurrentGrade.setText("");
@@ -236,7 +247,7 @@ public class MainFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isResumed()) {
-            onResume();
+            onResume(); // Run onResume() once the view is visible to the user
         }
     }
 
@@ -248,6 +259,7 @@ public class MainFragment extends Fragment {
             return;
         }
 
+        // Run the mini tutorial the first time the user views this fragment
         ShowcaseConfig config = new ShowcaseConfig();
         config.setDelay(500); // half second between each showcase view
 

@@ -28,18 +28,34 @@ import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
  */
 public class AssessmentsFragment extends Fragment {
 
+    /**
+     * Unique ID for the MaterialShowcaseView.
+     */
     final private String SHOWCASE_ID = "Test2";
 
+    /**
+     * Callback interface to the main activity.
+     */
     private ActivityCallback mCallbackActivity;
 
+    /**
+     * List Adapter for the ListView.
+     */
     private ListAdapter listAdapter;
 
+    /**
+     * The ListView that shows the list of assessments the user has entered.
+     */
     private ListView mainList;
 
-    private ViewGroup mContainer;
-
+    /**
+     * The FloatingActionButton that is used to add new assessment details.
+     */
     private FloatingActionButton fab;
 
+    /**
+     * The heading for the ListView.
+     */
     private TableRow mHeading;
 
     /**
@@ -54,8 +70,6 @@ public class AssessmentsFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_assessments, container, false);
 
         mHeading = (TableRow) view.findViewById(R.id.tableRow);
-
-        mContainer = container;
 
         // Set floating action button which will allow user to add a new assessment
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -91,7 +105,6 @@ public class AssessmentsFragment extends Fragment {
 
         shouldDisable(true);
 
-
         return view;
     }
 
@@ -99,13 +112,6 @@ public class AssessmentsFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mCallbackActivity = (ActivityCallback) activity;
-    }
-
-    public void resetListView() {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_assessments, mContainer, false);
-
-        listAdapter = new ListAdapter(view.getContext(), R.layout.item_list_row, mCallbackActivity.getAssessments());
-        mainList.setAdapter(listAdapter);
     }
 
     @Override
@@ -117,7 +123,7 @@ public class AssessmentsFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && isResumed()) {
+        if (isVisibleToUser && isResumed()) { // Run onResume() once the view is shown to user
             onResume();
         }
     }
@@ -130,6 +136,7 @@ public class AssessmentsFragment extends Fragment {
             return;
         }
 
+        // We want to show the user the mini tutorial the first time they move to this screen.
         ShowcaseConfig config = new ShowcaseConfig();
         config.setDelay(500); // half second between each showcase view
 
@@ -140,6 +147,11 @@ public class AssessmentsFragment extends Fragment {
         sequence.start();
     }
 
+    /**
+     * Helper method to indicate whether the user is to be restricted from using the view.
+     *
+     * @param shouldDisable true if to be restricted, else false
+     */
     public void shouldDisable(boolean shouldDisable) {
         if (shouldDisable) {
             fab.setVisibility(View.INVISIBLE);
@@ -148,6 +160,9 @@ public class AssessmentsFragment extends Fragment {
         }
     }
 
+    /**
+     * Forces an update of the list adapter, hence the list view.
+     */
     public void updateListAdapter() {
         listAdapter.notifyDataSetChanged();
     }

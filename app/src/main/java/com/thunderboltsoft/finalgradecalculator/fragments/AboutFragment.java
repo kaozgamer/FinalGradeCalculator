@@ -6,7 +6,9 @@ import android.preference.PreferenceFragment;
 import com.thunderboltsoft.finalgradecalculator.R;
 
 /**
- * Created by Thushan on 10-Jul-16.
+ * Fragment that contains the about preferences screen.
+ *
+ * @author Thushan Perera
  */
 public class AboutFragment extends PreferenceFragment {
     @Override

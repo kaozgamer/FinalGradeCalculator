@@ -8,7 +8,9 @@ import android.preference.PreferenceFragment;
 import com.thunderboltsoft.finalgradecalculator.R;
 
 /**
- * Created by Thushan on 08-Jul-16.
+ * Fragment that lets the user edit the settings of the app.
+ * <p/>
+ * NOT TO BE SENT TO PRODUCTION VERSION AT THIS STAGE.
  */
 public class SettingFragment extends PreferenceFragment {
     @Override
@@ -17,6 +19,7 @@ public class SettingFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.fragment_setting);
         Preference contactDeveloper = findPreference("pref_contact_dev");
 
+        // Email the developer
         contactDeveloper.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
