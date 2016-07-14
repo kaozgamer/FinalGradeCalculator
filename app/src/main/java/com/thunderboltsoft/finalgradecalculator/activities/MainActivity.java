@@ -51,7 +51,10 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
     /**
      * The title for our tabs.
      */
-    private CharSequence mTitles[] = {"Calculator", "Assessments", "Settings"};
+    private CharSequence mTitles[] = {
+            "Calculator",
+            "Assessments",
+            "Settings"};
 
     /**
      * The number of tabs.
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
 
         ActionBar sActionBar = getSupportActionBar();
         if (sActionBar != null) {
-            sActionBar.setTitle("Grade Calculator");
+            sActionBar.setTitle(getResources().getString(R.string.app_name));
         }
 
         mAssessments = new ListAssessments();

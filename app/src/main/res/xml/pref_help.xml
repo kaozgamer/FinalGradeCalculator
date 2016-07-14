@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="App">
+    <PreferenceCategory android:title="@string/pref_app">
         <Preference
-            android:summary="App that allows students to calculate their current grade in a unit, and how much they need in the final assessment in order to achieve their desired grade."
-            android:title="Description" />
+            android:summary="@string/pref_app_description_summary"
+            android:title="@string/pref_app_description" />
 
         <Preference
-            android:summary="Go to Google Play Store"
-            android:title="Rate This App">
+            android:summary="@string/pref_app_rate_summary"
+            android:title="@string/pref_app_rate">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/kaozgamer/GradeCalculator" />
         </Preference>
 
         <Preference
-            android:summary="View source code on Github"
-            android:title="Source Code">
+            android:summary="@string/view_source_code_on_github"
+            android:title="@string/pref_app_source_code">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/kaozgamer/GradeCalculator" />
         </Preference>
 
         <Preference
-            android:summary="1.0.0"
-            android:title="Version" />
+            android:summary="@string/pref_app_version_summary"
+            android:title="@string/pref_app_version" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="External Libraries Used">
+    <PreferenceCategory android:title="@string/pref_external_libraries_used">
 
         <Preference
-            android:summary="View source code on Github"
-            android:title="FloatingActionButton">
+            android:summary="@string/view_source_code_on_github"
+            android:title="@string/pref_external_libraries_used_fab">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/makovkastar/FloatingActionButton" />
         </Preference>
 
         <Preference
-            android:summary="View source code on Github"
-            android:title="MaterialShowcaseView">
+            android:summary="@string/view_source_code_on_github"
+            android:title="@string/pref_external_libraries_used_showcase">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/deano2390/MaterialShowcaseView" />

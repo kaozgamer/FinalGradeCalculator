@@ -142,8 +142,8 @@ public class AssessmentsFragment extends Fragment {
 
         MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_ID);
         sequence.setConfig(config);
-        sequence.addSequenceItem(fab, "Tap here to enter the grade and weight for an assessment", "GOT IT");
-        sequence.addSequenceItem(mHeading, "You can edit or delete any of these by tapping on them", "GOT IT");
+        sequence.addSequenceItem(fab, getResources().getString(R.string.assessments_frag_showcase_fab), getResources().getString(R.string.showcase_confirm));
+        sequence.addSequenceItem(mHeading, getResources().getString(R.string.assessments_frag_showcase_heading), getResources().getString(R.string.showcase_confirm));
         sequence.start();
     }
 

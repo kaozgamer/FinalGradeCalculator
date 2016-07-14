@@ -20,13 +20,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Enter Weight (%)">
+            android:hint="@string/hint_enter_weight">
 
-        <EditText
-            android:id="@+id/txtEnterWeight"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal" />
+            <EditText
+                android:id="@+id/txtEnterWeight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -34,12 +34,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Enter Grade (%)">
-        <EditText
-            android:id="@+id/txtEnterGrade"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="numberDecimal" />
+            android:hint="@string/hint_enter_grade">
+
+            <EditText
+                android:id="@+id/txtEnterGrade"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal" />
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>

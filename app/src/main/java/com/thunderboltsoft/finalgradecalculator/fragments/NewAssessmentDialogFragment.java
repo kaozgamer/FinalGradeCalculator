@@ -89,8 +89,8 @@ public class NewAssessmentDialogFragment extends DialogFragment {
 
         // Add OK and Cancel buttons to our dialog
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
-                .setTitle("Add Assessment Grade")
-                .setPositiveButton("OK",
+                .setTitle(getResources().getString(R.string.dialog_new_assessment_title))
+                .setPositiveButton(getResources().getString(R.string.dialog_new_assessment_positive_button),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -98,7 +98,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
                             }
                         }
                 )
-                .setNegativeButton("Cancel",
+                .setNegativeButton(getResources().getString(R.string.dialog_new_assessment_negative_button),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -124,7 +124,7 @@ public class NewAssessmentDialogFragment extends DialogFragment {
         Boolean canEdit = getArguments().getBoolean("isEditMode");
 
         if (canEdit) { // Check if opening up after the user clicks on an assessment in the assessments fragment
-            b.setNeutralButton("Delete",
+            b.setNeutralButton(getResources().getString(R.string.dialog_new_assessment_neutral_button),
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -156,12 +156,12 @@ public class NewAssessmentDialogFragment extends DialogFragment {
                     boolean shouldDismiss = true;
 
                     if (mGrade.getText().toString().isEmpty()) {
-                        mGrade.setError("Invalid Value");
+                        mGrade.setError(getResources().getString(R.string.dialog_new_assessment_error));
                         shouldDismiss = false;
                     }
 
                     if (mWeight.getText().toString().isEmpty()) {
-                        mWeight.setError("Invalid Value");
+                        mWeight.setError(getResources().getString(R.string.dialog_new_assessment_error));
                         shouldDismiss = false;
                     }
 
@@ -182,14 +182,14 @@ public class NewAssessmentDialogFragment extends DialogFragment {
                     if (newAssessment.isGradeValid()) {
                         mGrade.setError(null);
                     } else {
-                        mGrade.setError("Invalid Value");
+                        mGrade.setError(getResources().getString(R.string.dialog_new_assessment_error));
                         shouldDismiss = false;
                     }
 
                     if (newAssessment.isWeightValid()) {
                         mWeight.setError(null);
                     } else {
-                        mWeight.setError("Invalid Value");
+                        mWeight.setError(getResources().getString(R.string.dialog_new_assessment_error));
                         shouldDismiss = false;
                     }
 

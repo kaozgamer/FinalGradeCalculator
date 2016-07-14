@@ -56,9 +56,9 @@ public class HelpActivity extends AppCompatActivity {
             Intent mailto = new Intent(Intent.ACTION_SEND);
             mailto.setType("message/rfc822");
             mailto.putExtra(Intent.EXTRA_EMAIL, new String[]{"kaozgamerdev+grade_calculator@gmail.com"});
-            mailto.putExtra(Intent.EXTRA_SUBJECT, "Bug Report: Grade Calculator");
-            mailto.putExtra(Intent.EXTRA_TEXT, "What can I help you with?\n");
-            startActivity(Intent.createChooser(mailto, "Select email application"));
+            mailto.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.help_activity_email_bug_report_subject));
+            mailto.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.help_activity_email_bug_report_text));
+            startActivity(Intent.createChooser(mailto, getResources().getString(R.string.email_intent_chooser)));
 
             return true;
 
@@ -66,9 +66,9 @@ public class HelpActivity extends AppCompatActivity {
             Intent mailto = new Intent(Intent.ACTION_SEND);
             mailto.setType("message/rfc822");
             mailto.putExtra(Intent.EXTRA_EMAIL, new String[]{"kaozgamerdev+grade_calculator@gmail.com"});
-            mailto.putExtra(Intent.EXTRA_SUBJECT, "Feedback: Grade Calculator");
-            mailto.putExtra(Intent.EXTRA_TEXT, "What can I help you with?\n");
-            startActivity(Intent.createChooser(mailto, "Select email application"));
+            mailto.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.help_activity_email_feedback_subject));
+            mailto.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.help_activity_email_feedback_text));
+            startActivity(Intent.createChooser(mailto, getResources().getString(R.string.email_intent_chooser)));
 
             return true;
 

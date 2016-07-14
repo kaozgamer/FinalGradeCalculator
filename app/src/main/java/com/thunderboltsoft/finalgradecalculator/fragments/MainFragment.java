@@ -265,10 +265,10 @@ public class MainFragment extends Fragment {
 
         MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(getActivity(), SHOWCASE_ID);
         sequence.setConfig(config);
-        sequence.addSequenceItem(mSwitchCompat, "Switch this off if you do not know your current grade\n\nSwiping to the Assessment tab will then be available", "GOT IT");
-        sequence.addSequenceItem(mTxtCurrentGrade, "Enter your current weighted unit grade", "GOT IT");
-        sequence.addSequenceItem(mEditTextDesiredGrade, "Enter the grade that you are aiming for", "GOT IT");
-        sequence.addSequenceItem(mTxtFinalGradeWeight, "Enter the weight of the final assessment in your unit", "GOT IT");
+        sequence.addSequenceItem(mSwitchCompat, getResources().getString(R.string.main_frag_showcase_switch), getResources().getString(R.string.showcase_confirm));
+        sequence.addSequenceItem(mTxtCurrentGrade, getResources().getString(R.string.main_frag_showcase_current_grade), getResources().getString(R.string.showcase_confirm));
+        sequence.addSequenceItem(mEditTextDesiredGrade, getResources().getString(R.string.main_frag_showcase_desired_grade), getResources().getString(R.string.showcase_confirm));
+        sequence.addSequenceItem(mTxtFinalGradeWeight, getResources().getString(R.string.main_frag_showcase_final_weight), getResources().getString(R.string.showcase_confirm));
         sequence.start();
     }
 

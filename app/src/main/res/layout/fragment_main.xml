@@ -13,8 +13,8 @@
         android:id="@+id/switchCurrentGrade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/switch_description"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/switch_description"
         android:textOff="No"
         android:textOn="Yes" />
 
@@ -22,16 +22,16 @@
         android:id="@+id/linear_layout_current_desired"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_below="@id/switchCurrentGrade"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_below="@id/switchCurrentGrade">
+        android:orientation="horizontal">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_current_grade"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Current Grade (%)">
+            android:hint="@string/hint_current_grade">
 
             <EditText
                 android:id="@+id/textView"
@@ -45,7 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Desired Grade (%)">
+            android:hint="@string/hint_desired_grade">
 
             <EditText
                 android:id="@+id/editTextDesiredGrade"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:ems="6"
-            android:hint="Weight of Exam (%)"
+            android:hint="@string/hint_weight_exam"
             android:inputType="numberDecimal" />
     </android.support.design.widget.TextInputLayout>
 
@@ -76,20 +76,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewResult"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:hint="@string/desired_result_description"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
+        android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textViewResult"
         android:layout_below="@id/input_layout_final_weight"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="50sp" />
 
 
 </RelativeLayout>
