@@ -23,7 +23,7 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_help);
 
         // User needs toolbar to go back to the main activity screen
-        Toolbar toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
