@@ -46,4 +46,24 @@
         </Preference>
 
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_credits">
+
+        <Preference
+            android:summary="@string/pref_credits_math_easy_solutions_summary"
+            android:title="@string/pref_credits_math_easy_solutions">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://gradecalculator.mes.fm/" />
+        </Preference>
+
+        <Preference
+            android:summary="@string/pref_credits_dakirby309_summary"
+            android:title="@string/pref_credits_dakirby309">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="http://dakirby309.deviantart.com/" />
+        </Preference>
+
+    </PreferenceCategory>
 </PreferenceScreen>
