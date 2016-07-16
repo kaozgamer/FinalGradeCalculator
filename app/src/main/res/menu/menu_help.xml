@@ -20,5 +20,6 @@
         android:id="@+id/action_help_about"
         android:orderInCategory="3"
         android:title="@string/action_about"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:visible="false" />
 </menu>

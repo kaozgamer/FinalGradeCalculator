@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
             return true;
         } else if (id == R.id.action_help) { // Did the user click on help?
             Intent intent = new Intent();
-            intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.HelpActivity");
+            intent.setClassName(this, "com.thunderboltsoft.finalgradecalculator.activities.AboutActivity"); // instead of HelpActivity, don't need it anymore
             startActivity(intent);
 
             return true;

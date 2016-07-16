@@ -60,7 +60,7 @@
     <string name="action_about">About</string>
 
     <!-- menu_main.xml -->
-    <string name="action_help_and_feedback">Help &amp; Feedback</string>
+    <string name="action_help_and_feedback">About &amp; Feedback</string>
     <string name="action_settings">Settings</string>
 
     <!-- pref_help.xml -->
