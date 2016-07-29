@@ -1,4 +1,6 @@
 # Grade Calculator
+<a href='https://play.google.com/store/apps/details?id=com.thunderboltsoft.finalgradecalculator&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height='80' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+
 Grade Calculator is an open source Android app which allows users to keep track of their unit grades throughout the study semester. It will also allow the user to check how well they need to do in future assessments in order to achieve their desired grade for that unit.
 
 ### Developers
